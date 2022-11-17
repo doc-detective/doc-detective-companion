@@ -1,0 +1,1 @@
+{"version":3,"file":"background.js","mappings":";;;;;AAAA;AACA;AACA;AACA;AACA","sources":["webpack://doc-detective-browser/./src/background.js"],"sourcesContent":["chrome.runtime.onInstalled.addListener(() => {\n  chrome.action.setBadgeText({\n    text: \"OFF\",\n  });\n});\n"],"names":[],"sourceRoot":""}
