@@ -431,10 +431,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _medv_finder__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @medv/finder */ "./node_modules/@medv/finder/finder.js");
 
 
-document.addEventListener('click', event => {
-  const selector = (0,_medv_finder__WEBPACK_IMPORTED_MODULE_0__.finder)(event.target)
-  console.log(selector)  
-})
+document.addEventListener("click", (event) => {
+  let dialogCheck = document.getElementById("doc-detective");
+  if (dialogCheck) {
+    event.stopPropagation();
+    event.preventDefault();
+    const selector = (0,_medv_finder__WEBPACK_IMPORTED_MODULE_0__.finder)(event.target);
+    console.log(selector);
+  }
+});
+
 })();
 
 /******/ })()

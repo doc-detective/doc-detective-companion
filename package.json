@@ -51,6 +51,10 @@
       {
         "name": "content",
         "src": "./src/content.js"
+      },
+      {
+        "name": "dialog",
+        "src": "./src/dialog.js"
       }
     ]
   },

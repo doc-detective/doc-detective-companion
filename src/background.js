@@ -1,5 +1,6 @@
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.action.setBadgeText({
-    text: "OFF",
+chrome.action.onClicked.addListener(function (tab) {
+  chrome.scripting.executeScript({
+    target: {tabId: tab.id},
+    files: ['dialog.js']
   });
-});
+})
