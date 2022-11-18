@@ -432,8 +432,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener("click", (event) => {
-  let dialogCheck = document.getElementById("doc-detective");
-  if (dialogCheck) {
+  let dialog = document.getElementById("doc-detective");
+  if (dialog) {
     event.stopPropagation();
     event.preventDefault();
     const selector = (0,_medv_finder__WEBPACK_IMPORTED_MODULE_0__.finder)(event.target);
