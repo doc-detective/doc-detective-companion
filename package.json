@@ -43,6 +43,13 @@
     }
   },
   "xtbuild": {
+    "scss": "./src/**/*.css",
+    "scss_bundles": [
+      {
+        "src": "./src/dialog.css",
+        "name": "dialog"
+      }
+    ],
     "js_bundles": [
       {
         "name": "background",

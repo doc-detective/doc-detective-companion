@@ -437,7 +437,7 @@ document.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
     const selector = (0,_medv_finder__WEBPACK_IMPORTED_MODULE_0__.finder)(event.target);
-    console.log(selector);
+    dialog.innerHTML = `<p class="code">${selector}</p>`;
   }
 });
 

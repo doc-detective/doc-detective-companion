@@ -6,6 +6,6 @@ document.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
     const selector = finder(event.target);
-    console.log(selector);
+    dialog.innerHTML = `<p class="code">${selector}</p>`;
   }
 });

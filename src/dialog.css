@@ -1,0 +1,20 @@
+#doc-detective {
+    position: fixed;
+    right: 10pt;
+    bottom: 10pt;
+    height: 50pt;
+    width: 300pt;
+    background-color: #fff;
+    border: 2px solid #939393;
+    border-radius: 5pt;
+}
+#doc-detective p {
+    color: #000;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: 400;
+}
+#doc-detective p.code {
+    font-family: 'Courier New', Courier, monospace;
+}

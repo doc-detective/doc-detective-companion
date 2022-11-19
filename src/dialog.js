@@ -4,7 +4,6 @@ if (!dialog) {
   // If doesn't exist, create it
   let dialog = document.createElement("div");
   dialog.id = "doc-detective";
-  dialog.style = "";
   document.body.appendChild(dialog);
 } else {
   // If exists, remove it
