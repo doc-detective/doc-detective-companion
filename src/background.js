@@ -3,7 +3,7 @@ chrome.action.onClicked.addListener(function (tab) {
   // Create or remove dialog
   chrome.scripting.executeScript({
     target: {tabId: tab.id},
-    files: ['dialog.js']
+    files: ['display.js']
   });
   // Inject dialog CSS
   chrome.scripting.insertCSS({

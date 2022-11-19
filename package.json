@@ -60,6 +60,10 @@
         "src": "./src/content.js"
       },
       {
+        "name": "display",
+        "src": "./src/display.js"
+      },
+      {
         "name": "dialog",
         "src": "./src/dialog.js"
       }
