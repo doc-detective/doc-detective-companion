@@ -33,7 +33,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": [ "dialog.html", "dialog.css", "dialog.js" ],
+      "resources": [ "/dialog.html", "/dialog.css", "/dialog.js" ],
       "matches": [ "<all_urls>" ],
       "use_dynamic_url": true
     }
