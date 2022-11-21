@@ -29,18 +29,10 @@ async function toggleDisplay() {
 }
 
 function copySelector() {
-  // Get the text field
-  var copyText = document.getElementById("selectorDisplay");
-  console.log(copyText);
-  // Select the text field
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
-
-  // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value);
-
-  // Alert the copied text
-  alert("Copied the text: " + copyText.value);
+  const selectorDisplay = document.getElementById("selectorDisplay");
+  copyText = selectorDisplay.innerText;
+  navigator.clipboard.writeText(copyText);
+  console.log("Copied the text: " + copyText);
 }
 
 toggleDisplay();
