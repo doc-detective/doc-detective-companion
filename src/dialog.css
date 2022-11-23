@@ -2,32 +2,46 @@
     position: fixed;
     right: 10pt;
     bottom: 10pt;
-    height: 50pt;
-    width: 300pt;
+    height: 40pt;
+    width: 200pt;
     background-color: #fff;
     border: 2px solid #939393;
     border-radius: 5pt;
 }
 #doc-detective #selector {
     color: #000;
-    height: 45pt;
-    margin: auto;
     text-align: center;
-    width: 80%;
+    height: 100%;
+    width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10pt;
     font-weight: 400;
     background-color: #fff;
-    border: 1px solid #939393;
-    border-radius: 5pt;
+    /* border: 1px solid #939393;
+    border-radius: 5pt; */
     position: relative;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
 }
-#doc-detective #selectorDisplay {
-    width: 80%;
+#doc-detective p#selectorDisplay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: 80%;
+    width: 100%;
+    padding: 10% 0;
+    text-align: left;
     font-family: 'Courier New', Courier, monospace;
 }
-#doc-detective .code button {
+#doc-detective .copy {
     position: absolute;
-    top: 5pt;
-    right: 5pt;
+    top: 0pt;
+    right: 0pt;
+    left: 0pt;
+    bottom: 0pt;
 }
