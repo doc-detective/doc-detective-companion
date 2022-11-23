@@ -8,6 +8,6 @@ chrome.action.onClicked.addListener(function (tab) {
   // Create or remove dialog
   chrome.scripting.executeScript({
     target: {tabId: tab.id},
-    files: ['display.js']
+    files: ['dialog.js']
   });
 })

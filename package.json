@@ -1,7 +1,7 @@
 {
-  "name": "doc-detective-browser",
-  "description": "css",
-  "version": "0.0.1",
+  "name": "doc-detective-companion",
+  "description": "CSS selector helper",
+  "version": "1.0.0",
   "homepage": "https://github.com/hawkeyexl/doc-detective-browser/issues",
   "author": "Manny Silva",
   "repository": {
@@ -58,10 +58,6 @@
       {
         "name": "content",
         "src": "./src/content.js"
-      },
-      {
-        "name": "display",
-        "src": "./src/display.js"
       },
       {
         "name": "dialog",
