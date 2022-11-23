@@ -1,11 +1,11 @@
 {
     "appName": {
-        "message": "browser2"
+        "message": "Doc Detective Companion"
     },
     "appShortName": {
-        "message": "browser2"
+        "message": "Doc Detective Companion"
     },
     "appDescription": {
-        "message": "css"
+        "message": "CSS selector helper and test builder."
     }
 }

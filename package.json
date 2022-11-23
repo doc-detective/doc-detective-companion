@@ -1,6 +1,6 @@
 {
   "name": "doc-detective-companion",
-  "description": "CSS selector helper",
+  "description": "CSS selector helper and test builder.",
   "version": "1.0.0",
   "homepage": "https://github.com/hawkeyexl/doc-detective-browser/issues",
   "author": "Manny Silva",
