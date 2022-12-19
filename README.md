@@ -1,13 +1,23 @@
-# browser2
+# Doc Detective Companion
 
-css
+A browser extention to find short, unique CSS selectors for use in [Doc Detective](https://github.com/hawkeyexl/doc-detective) tests.
 
-## Development 
+## Install
 
-This extension was created with [Extension CLI](https://oss.mobilefirst.me/extension-cli/)!
+Get the extension from your browser's applicable store, or download the relevant artifact from thie repo and load it in Chrome's Extensions page:
 
-If you find this software helpful [star](https://github.com/MobileFirstLLC/extension-cli/) or [sponsor](https://github.com/sponsors/MobileFirstLLC) this project.
+*   **Chromium-based browsers**: [release.zip](release.zip)
 
+## Future updates
+
+*   Support for non-Chromium-based browsers.
+*   Specify preferred IDs, classes, or attributes to use in CSS selectors.
+*   Build Doc Detective test actions based on CSS selectors.
+*   Build entire Doc Detective tests based on CSS selectors.
+
+## Develop
+
+This extension was created with [Extension CLI](https://oss.mobilefirst.me/extension-cli/).
 
 ### Available Commands
 
