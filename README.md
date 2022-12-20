@@ -4,9 +4,10 @@ A browser extention to find short, unique CSS selectors for use in [Doc Detectiv
 
 ## Install
 
-Get the extension from your browser's applicable store, or download the relevant artifact from thie repo and load it in Chrome's Extensions page:
+Get the extension from your browser's applicable store, or build and install [development](#develop) versions.
 
-*   **Chromium-based browsers**: [release.zip](release.zip)
+[!["Chrome Webstore"](./chrome-webstore.png)](
+https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm)
 
 ## Future updates
 
