@@ -2,10 +2,10 @@
   "name": "__MSG_appName__",
   "short_name": "__MSG_appShortName__",
   "description": "__MSG_appDescription__",
-  "homepage_url": "http://chrome.google.com/webstore",
   "chrome": {
     "manifest_version": 3,
-    "version_name": "1.0.1",
+    "version_name": "__MSG_version__",
+    "homepage_url": "https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm",
     "background": {
       "service_worker": "background.js"
     },
@@ -20,6 +20,7 @@
   },
   "firefox": {
     "manifest_version": 2,
+    "homepage_url": "https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm",
     "background": {
       "scripts": [
         "background.js"
@@ -34,7 +35,7 @@
       "default_title": "__MSG_appName__"
     }
   },
-  "version": "1.0.1",
+  "version": "__MSG_version__",
   "default_locale": "en",
   "minimum_chrome_version": "88",
   "permissions": [
