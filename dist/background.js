@@ -1,1 +1,0 @@
-chrome.action.onClicked.addListener((function(i){chrome.scripting.insertCSS({target:{tabId:i.id},files:["dialog.css"]}),chrome.scripting.executeScript({target:{tabId:i.id},files:["dialog.js"]})}));

@@ -7,5 +7,8 @@
     },
     "appDescription": {
         "message": "CSS selector helper and test builder."
+    },
+    "version": {
+        "message": "1.0.1"
     }
 }
