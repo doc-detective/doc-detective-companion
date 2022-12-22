@@ -1305,26 +1305,28 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!***************************!*\
-  !*** ./src/background.js ***!
-  \***************************/
+/*!**************************************!*\
+  !*** ./src/background-manifestv2.js ***!
+  \**************************************/
 var browser = __webpack_require__(/*! webextension-polyfill */ "./node_modules/webextension-polyfill/dist/browser-polyfill.js");
 
-// On extension button click
-browser.browserAction.onClicked.addListener(function (tab) {
+// On extension button click (Firefox - Manifest v2)
+browser.browserAction.onClicked.addListener((tab) => insertDialog(tab));
+
+function insertDialog(tab) {
   // Inject dialog CSS
   browser.scripting.insertCSS({
-    target: {tabId: tab.id},
+    target: { tabId: tab.id },
     files: ['dialog.css']
   });
   // Create or remove dialog
   browser.scripting.executeScript({
-    target: {tabId: tab.id},
+    target: { tabId: tab.id },
     files: ['dialog.js']
   });
-})
+}
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=background.js.map
+//# sourceMappingURL=background-manifestv2.js.map

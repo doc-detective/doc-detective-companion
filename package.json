@@ -53,8 +53,12 @@
     ],
     "js_bundles": [
       {
-        "name": "background",
-        "src": "./src/background.js"
+        "name": "background-manifestv2",
+        "src": "./src/background-manifestv2.js"
+      },
+      {
+        "name": "background-manifestv3",
+        "src": "./src/background-manifestv3.js"
       },
       {
         "name": "content",
