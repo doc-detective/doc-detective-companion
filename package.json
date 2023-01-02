@@ -1,7 +1,7 @@
 {
   "name": "doc-detective-companion",
   "description": "CSS selector helper and test builder.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/hawkeyexl/doc-detective-browser/issues",
   "author": "Manny Silva",
   "repository": {
@@ -13,10 +13,10 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "xt-build -e dev -p chrome -w",
-    "start:firefox": "xt-build -e dev -p firefox -w",
-    "build": "xt-build -e prod -p chrome",
-    "build:firefox": "xt-build -e prod -p firefox",
+    "start": "xt-build -e dev -p v3 -w",
+    "start:v2": "xt-build -e dev -p v2 -w",
+    "build": "xt-build -e prod -p v3",
+    "build:v2": "xt-build -e prod -p v2",
     "clean": "xt-clean",
     "docs": "xt-docs",
     "test": "xt-test",
