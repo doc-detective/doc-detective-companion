@@ -4,14 +4,12 @@ A browser extention to find short, unique CSS selectors for use in [Doc Detectiv
 
 ## Install
 
-Get the extension from your browser's applicable store, or build and install [development](#develop) versions.
+Get the extension from your browser's applicable store, or build and install [development](#develop) versions:
 
-[!["Chrome Webstore"](./chrome-webstore.png)](
-https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm)
-
+*   [Chrome Webstore](https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm)
+*   [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/doc-detective-companion)
 ## Future updates
 
-*   Support for non-Chromium-based browsers.
 *   Specify preferred IDs, classes, or attributes to use in CSS selectors.
 *   Build Doc Detective test actions based on CSS selectors.
 *   Build entire Doc Detective tests based on CSS selectors.
@@ -24,12 +22,10 @@ This extension was created with [Extension CLI](https://oss.mobilefirst.me/exten
 
 | Commands | Description |
 | --- | --- |
-| `npm run start` | build extension, watch file changes |
-| `npm run build` | generate release version |
-| `npm run docs` | generate source code docs |
-| `npm run clean` | remove temporary files |
-| `npm run test` | run unit tests |
-| `npm run sync` | update config files |
+| `npm run start` | build extension for manifest v3 browsers (Chrome), watch file changes |
+| `npm run start:v2` | build extension for manifest v2 browsers (Firefox), watch file changes |
+| `npm run build` | generate release version for manifest v3 browsers (Chrome) |
+| `npm run build:v2` | generate release version for manifest v2 browsers (Firefox) |
 
 For CLI instructions see [User Guide &rarr;](https://oss.mobilefirst.me/extension-cli/)
 
