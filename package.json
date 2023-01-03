@@ -18,6 +18,7 @@
     "start:v2": "xt-build -e dev -p v2 -w",
     "start:chrome": "npm run start:v3",
     "start:firefox": "npm run start:v2",
+    "start:safari": "xt-build -e dev -p v2 && xcrun --run safari-web-extension-converter --macos-only --copy-resources --force --no-open --project-location ./dist ./dist && cd './dist/Doc Detective Companion' && xcodebuild build && './build/Release/Doc Detective Companion.app/Contents/MacOS/Doc Detective Companion'",
     "build": "npm run build:v3",
     "build:v3": "xt-build -e prod -p v3",
     "build:v2": "xt-build -e prod -p v2",
