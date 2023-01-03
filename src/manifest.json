@@ -4,7 +4,7 @@
   "description": "__MSG_appDescription__",
   "v3": {
     "manifest_version": 3,
-    "version_name": "1.0.2",
+    "version_name": "1.1.0",
     "homepage_url": "https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm",
     "background": {
       "service_worker": "background-manifestv3.js"
@@ -35,7 +35,7 @@
       "default_title": "__MSG_appName__"
     }
   },
-  "version": "1.0.2",
+  "version": "1.1.0",
   "default_locale": "en",
   "minimum_chrome_version": "88",
   "permissions": [
