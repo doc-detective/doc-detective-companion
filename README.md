@@ -6,8 +6,20 @@ A browser extention to find short, unique CSS selectors for use in [Doc Detectiv
 
 Get the extension from your browser's applicable store, or build and install [development](#develop) versions:
 
-*   [Chrome Webstore](https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm)
-*   [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/doc-detective-companion)
+*   Chrome/Edge: [Chrome Webstore](https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm)
+*   Firefox: [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/doc-detective-companion)
+*   Safari: Unavailable on the Mac App Store. (If someone wants to sponsor yearly Apple Developer registration fees, contact me.) Build a local [development](#develop) version.
+
+## Use
+
+To find CSS selectors,
+1.  Click the Doc Detective Companion icon in your browser. A dialog appears in your browser window.
+1.  Click an element on your page. A CSS selector for the element appears in the Doc Detective Companion dialog.
+
+    **Note**: Doc Detective Companion attempts to prevent standard browser click events (like following hyperlinks) while the dialog is active. Some websites use non-standard click event behaviors and may continue to perform tasks as they typically do.
+
+1.  When you're done, click the Doc Detective Companion icon again. The dialog disappears, and standard click event behaviors resume.
+
 ## Future updates
 
 *   Specify preferred IDs, classes, or attributes to use in CSS selectors.
@@ -22,25 +34,8 @@ This extension was created with [Extension CLI](https://oss.mobilefirst.me/exten
 
 | Commands | Description |
 | --- | --- |
-| `npm run start` | build extension for manifest v3 browsers (Chrome), watch file changes |
-| `npm run start:v2` | build extension for manifest v2 browsers (Firefox), watch file changes |
-| `npm run build` | generate release version for manifest v3 browsers (Chrome) |
-| `npm run build:v2` | generate release version for manifest v2 browsers (Firefox) |
-
-For CLI instructions see [User Guide &rarr;](https://oss.mobilefirst.me/extension-cli/)
-
-### Learn More
-
-**Extension Developer guides**
-
-- [Getting started with extension development](https://developer.chrome.com/extensions/getstarted)
-- Manifest configuration: [version 2](https://developer.chrome.com/extensions/manifest) - [version 3](https://developer.chrome.com/docs/extensions/mv3/intro/)
-- [Permissions reference](https://developer.chrome.com/extensions/declare_permissions)
-- [Chrome API reference](https://developer.chrome.com/docs/extensions/reference/)
-
-**Extension Publishing Guides**
-
-- [Publishing for Chrome](https://developer.chrome.com/webstore/publish)
-- [Publishing for Edge](https://docs.microsoft.com/en-us/microsoft-edge/extensions-chromium/publish/publish-extension)
-- [Publishing for Opera addons](https://dev.opera.com/extensions/publishing-guidelines/)
-- [Publishing for Firefox](https://extensionworkshop.com/documentation/publish/submitting-an-add-on/)
+| `npm run start:chrome` | Build extension for Chromium-based browsers and watch file changes. Extension files appear in `./dist`. Load as an [unpacked extension](https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked). |
+| `npm run start:firefox` | Build extension for Firefox and watch file changes. Extension files appear in `./dist`. Load as a [temporary extension](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/), selecting the `manifest.json` file. |
+| `npm run start:safari` | MacOS only. Build extension for Safari. Must run again to update for file changes. Requires Xcode. Requires Safari to [run unsigned extensions](https://developer.apple.com/documentation/safariservices/safari_web_extensions/running_your_safari_web_extension#3744467). |
+| `npm run build:chrome` | Generate release version for Chromium-based browsers. |
+| `npm run build:firefox` | Generate release version for Firefox. |
