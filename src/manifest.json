@@ -54,5 +54,12 @@
         "<all_urls>"
       ]
     }
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{6285a9b3-5204-4d30-9620-0e87f1e9a171}",
+      "strict_min_version": "42.0"
+    }
+  }
+  
 }
