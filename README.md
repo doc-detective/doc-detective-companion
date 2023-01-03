@@ -1,6 +1,6 @@
 # Doc Detective Companion
 
-A browser extention to find short, unique CSS selectors for use in [Doc Detective](https://github.com/hawkeyexl/doc-detective) tests.
+A browser extension to find short, unique CSS selectors for use in [Doc Detective](https://github.com/hawkeyexl/doc-detective) tests.
 
 ## Install
 
