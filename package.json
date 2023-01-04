@@ -20,7 +20,8 @@
     "build": "npm run build:chrome",
     "build:chrome": "xt-build -e prod -p chrome",
     "build:firefox": "xt-build -e prod -p firefox",
-    "publish:chrome": "export $(grep -v '^#' .env | xargs) &&  npm run build:chrome",
+    "publish": "npm run publish:chrome && npm run publish:firefox",
+    "publish:chrome": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p chrome && chrome-webstore-upload upload --auto-publish --source ./dist",
     "publish:firefox": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p firefox && web-ext --channel listed -s ./dist sign",
     "clean": "xt-clean",
     "docs": "xt-docs",
@@ -78,6 +79,7 @@
   },
   "dependencies": {
     "@medv/finder": "^2.1.0",
+    "chrome-webstore-upload-cli": "^2.1.0",
     "web-ext": "^7.4.0"
   }
 }
