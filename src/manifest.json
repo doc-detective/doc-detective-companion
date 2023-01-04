@@ -2,10 +2,10 @@
   "name": "__MSG_appName__",
   "short_name": "__MSG_appShortName__",
   "description": "__MSG_appDescription__",
-  "v3": {
+  "homepage_url": "https://github.com/hawkeyexl/doc-detective-companion",
+  "chrome": {
     "manifest_version": 3,
     "version_name": "1.1.0",
-    "homepage_url": "https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm",
     "background": {
       "service_worker": "background-manifestv3.js"
     },
@@ -18,9 +18,8 @@
       "default_title": "__MSG_appName__"
     }
   },
-  "v2": {
+  "firefox": {
     "manifest_version": 2,
-    "homepage_url": "https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm",
     "background": {
       "scripts": [
         "background-manifestv2.js"
@@ -58,7 +57,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "{6285a9b3-5204-4d30-9620-0e87f1e9a171}",
-      "strict_min_version": "42.0"
+      "strict_min_version": "48.0"
     }
   }
   
