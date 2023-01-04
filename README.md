@@ -39,3 +39,6 @@ This extension was created with [Extension CLI](https://oss.mobilefirst.me/exten
 | `npm run start:safari` | MacOS only. Build extension for Safari. Must run again to update for file changes. Requires Xcode. Requires Safari to [run unsigned extensions](https://developer.apple.com/documentation/safariservices/safari_web_extensions/running_your_safari_web_extension#3744467). |
 | `npm run build:chrome` | Generate release version for Chromium-based browsers. |
 | `npm run build:firefox` | Generate release version for Firefox. |
+| `npm run publish` | Generate release versions and publish to Chrome Web Store and Firefox Addons. Requires necessary credentials in `./.env`.|
+| `npm run publish:chrome` | Generate release version and publish to Chrome Web Store. Requires necessary credentials in `./.env`.|
+| `npm run publish:firefox` | Generate release version and publish to Firefox Addons. Requires necessary credentials in `./.env`.|
