@@ -13,17 +13,15 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "npm run start:v3",
-    "start:v3": "xt-build -e dev -p v3 -w",
-    "start:v2": "xt-build -e dev -p v2 -w",
-    "start:chrome": "npm run start:v3",
-    "start:firefox": "npm run start:v2",
-    "start:safari": "xt-build -e dev -p v2 && xcrun --run safari-web-extension-converter --macos-only --copy-resources --force --no-open --project-location ./dist ./dist && cd './dist/Doc Detective Companion' && xcodebuild build && './build/Release/Doc Detective Companion.app/Contents/MacOS/Doc Detective Companion'",
-    "build": "npm run build:v3",
-    "build:v3": "xt-build -e prod -p v3",
-    "build:v2": "xt-build -e prod -p v2",
-    "build:chrome": "npm run build:v3",
-    "build:firefox": "npm run build:v2",
+    "start": "npm run start:chrome",
+    "start:chrome": "xt-build -e dev -p chrome -w",
+    "start:firefox": "xt-build -e dev -p firefox -w",
+    "start:safari": "xt-build -e dev -p firefox && xcrun --run safari-web-extension-converter --macos-only --copy-resources --force --no-open --project-location ./dist ./dist && cd './dist/Doc Detective Companion' && xcodebuild build && './build/Release/Doc Detective Companion.app/Contents/MacOS/Doc Detective Companion'",
+    "build": "npm run build:chrome",
+    "build:chrome": "xt-build -e prod -p chrome",
+    "build:firefox": "xt-build -e prod -p firefox",
+    "publish:chrome": "export $(grep -v '^#' .env | xargs) &&  npm run build:chrome",
+    "publish:firefox": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p firefox && web-ext --channel listed -s ./dist sign",
     "clean": "xt-clean",
     "docs": "xt-docs",
     "test": "xt-test",
@@ -51,6 +49,7 @@
     }
   },
   "xtbuild": {
+    "releases": "./build/",
     "scss": "./src/**/*.css",
     "scss_bundles": [
       {
@@ -79,7 +78,6 @@
   },
   "dependencies": {
     "@medv/finder": "^2.1.0",
-    "dotenv": "^16.0.3",
-    "jsonwebtoken": "^9.0.0"
+    "web-ext": "^7.4.0"
   }
 }
