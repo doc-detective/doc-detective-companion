@@ -1,6 +1,7 @@
 #doc-detective {
   all: revert;
   position: fixed;
+  z-index: 1000;
   right: 10pt;
   bottom: 10pt;
   height: 40pt;

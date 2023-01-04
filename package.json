@@ -1,7 +1,7 @@
 {
   "name": "doc-detective-companion",
   "description": "CSS selector helper and test builder.",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "homepage": "https://github.com/hawkeyexl/doc-detective-browser/issues",
   "author": "Manny Silva",
   "repository": {
@@ -13,10 +13,16 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "xt-build -e dev -p chrome -w",
+    "start": "npm run start:chrome",
+    "start:chrome": "xt-build -e dev -p chrome -w",
     "start:firefox": "xt-build -e dev -p firefox -w",
-    "build": "xt-build -e prod -p chrome",
+    "start:safari": "xt-build -e dev -p firefox && xcrun --run safari-web-extension-converter --macos-only --copy-resources --force --no-open --project-location ./dist ./dist && cd './dist/Doc Detective Companion' && xcodebuild build && './build/Release/Doc Detective Companion.app/Contents/MacOS/Doc Detective Companion'",
+    "build": "npm run build:chrome",
+    "build:chrome": "xt-build -e prod -p chrome",
     "build:firefox": "xt-build -e prod -p firefox",
+    "publish": "npm run publish:chrome && npm run publish:firefox",
+    "publish:chrome": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p chrome && chrome-webstore-upload upload --auto-publish --source ./dist",
+    "publish:firefox": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p firefox && web-ext --channel listed -s ./dist sign",
     "clean": "xt-clean",
     "docs": "xt-docs",
     "test": "xt-test",
@@ -44,6 +50,7 @@
     }
   },
   "xtbuild": {
+    "releases": "./build/",
     "scss": "./src/**/*.css",
     "scss_bundles": [
       {
@@ -71,6 +78,8 @@
     ]
   },
   "dependencies": {
-    "@medv/finder": "^2.1.0"
+    "@medv/finder": "^2.1.0",
+    "chrome-webstore-upload-cli": "^2.1.0",
+    "web-ext": "^7.4.0"
   }
 }

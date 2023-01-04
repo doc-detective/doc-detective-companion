@@ -3,10 +3,16 @@
 # dependencies
 /node_modules
 
+# development
+/dist
+
 # production
 /build
 
 # misc
 .DS_Store
+
+# env
+*.env
 
 npm-debug.log*
