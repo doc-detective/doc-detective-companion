@@ -1,4 +1,4 @@
-name: Publish release to Chrome Web Store and Firefox Addons
+name: Publish to extension stores
 on:
   release:
     types: [created]
