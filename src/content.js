@@ -1,9 +1,21 @@
+var browser = require("webextension-polyfill");
 import { finder } from "@medv/finder";
 
-document.addEventListener("click", (event) => {
+document.addEventListener("click", async (event) => {
   let dialog = document.getElementById("doc-detective");
   if (dialog) {
-    const selector = finder(event.target);
+    let options = {
+      root: document.body,
+      idName: (name) => true,
+      className: (name) => true,
+      tagName: (name) => true,
+      attr: (name, value) => false,
+      seedMinLength: 1,
+      optimizedMinLength: 2,
+      threshold: 1000,
+      maxNumberOfTries: 10_000,
+    };
+    const selector = finder(event.target, options);
     // Loop to identify if selector is part of main page
     let inDialog = false;
     let elements = [];
