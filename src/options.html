@@ -7,10 +7,42 @@
 
 <body>
     <form>
-        <label>Preferred ID <input type="text" id="preferredID" name="preferredID" /></label><br />
-        <label>Preferred class <input type="text" id="preferredClass" name="preferredClass" /></label><br />
-        <label>Preferred tag <input type="text" id="preferredTag" name="preferredTag" /></label><br />
-        <label>Preferred attribute <input type="text" id="preferredAttribute" name="preferredAttribute" /></label><br />
+        <div><b>IDs</b><br />
+            <label for="defaultBehaviorIDs">Default behavior:
+                <select name="defaultBehaviorIDs" id="defaultBehaviorIDs">
+                    <option value="true">Allow all</option>
+                    <option value="false">Disallow all</option>
+                </select></label><br />
+            <label>Allowed<input type="text" id="allowedIDs" name="allowedIDs" /></label><br />
+            <label>Disallowed<input type="text" id="disallowedIDs" name="disallowedIDs" /></label><br />
+        </div>
+        <div><b>Classes</b><br />
+            <label for="defaultBehaviorClasses">Default behavior:
+                <select name="defaultBehaviorClasses" id="defaultBehaviorClasses">
+                    <option value="true">Allow all</option>
+                    <option value="false">Disallow all</option>
+                </select></label><br />
+            <label>Allowed<input type="text" id="allowedClasses" name="allowedClasses" /></label><br />
+            <label>Disallowed<input type="text" id="disallowedClasses" name="disallowedClasses" /></label><br />
+        </div>
+        <div><b>Tags</b><br />
+            <label for="defaultBehaviorTags">Default behavior:
+                <select name="defaultBehaviorTags" id="defaultBehaviorTags">
+                    <option value="true">Allow all</option>
+                    <option value="false">Disallow all</option>
+                </select></label><br />
+            <label>Allowed<input type="text" id="allowedTags" name="allowedTags" /></label><br />
+            <label>Disallowed<input type="text" id="disallowedTags" name="disallowedTags" /></label><br />
+        </div>
+        <div><b>Attributes</b><br />
+            <label for="defaultBehaviorAttributes">Default behavior:
+                <select name="defaultBehaviorAttributes" id="defaultBehaviorAttributes">
+                    <option value="true">Allow all</option>
+                    <option value="false">Disallow all</option>
+                </select></label><br />
+            <label>Allowed<input type="text" id="allowedAttributes" name="allowedAttributes" /></label><br />
+            <label>Disallowed<input type="text" id="disallowedAttributes" name="disallowedAttributes" /></label><br />
+        </div>
         <button type="submit">Save</button>
     </form>
 
