@@ -72,6 +72,10 @@
         "src": "./src/content.js"
       },
       {
+        "name": "options",
+        "src": "./src/options.js"
+      },
+      {
         "name": "dialog",
         "src": "./src/dialog.js"
       }
