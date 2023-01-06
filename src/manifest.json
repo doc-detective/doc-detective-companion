@@ -5,7 +5,7 @@
   "homepage_url": "https://github.com/hawkeyexl/doc-detective-companion",
   "chrome": {
     "manifest_version": 3,
-    "version_name": "1.1.0",
+    "version_name": "1.2.0",
     "background": {
       "service_worker": "background-manifestv3.js",
       "type": "module"
@@ -35,7 +35,7 @@
       "default_title": "__MSG_appName__"
     }
   },
-  "version": "1.1.0",
+  "version": "1.2.0",
   "default_locale": "en",
   "minimum_chrome_version": "88",
   "permissions": [
