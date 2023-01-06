@@ -39,6 +39,30 @@ async function loadStorage() {
   return storage;
 }
 
+function assessSelector(selector, allowlist, allowMode, denylist, denyMode, defaultBehavior) {
+  let allow;
+  let deny;
+  let regex;
+
+  if (allowMode === "exact") {
+    allow = allowlist.includes(selector);
+  } else if (allowMode === "regex") {
+    regex = `/${selector}/g`;
+    allow = allowlist.filter((item) => item.match(regex)).length;
+  }
+
+  if (denyMode === "exact") {
+    deny = denylist.includes(selector);
+  } else if (denyMode === "regex") {
+    regex = `/${selector}/g`;
+    deny = denylist.filter((item) => item.match(regex)).length;
+  }
+
+  if (deny) return false;
+  if (allow) return true;
+  return defaultBehavior;
+}
+
 document.addEventListener("click", async (event) => {
   let dialog = document.getElementById("doc-detective");
   if (dialog) {
@@ -46,11 +70,10 @@ document.addEventListener("click", async (event) => {
     console.log(storage);
     let options = {
       root: document.body,
-      // TODO: Refine logic
-      idName: (name) => storage.allowedIDs.includes(name) && !storage.disallowedIDs.includes(name) || storage.defaultBehaviorIDs,
-      className: (name) => storage.allowedClasses.includes(name) && !storage.disallowedClasses.includes(name)|| storage.defaultBehaviorClasses,
-      tagName: (name) => storage.allowedTags.includes(name) && !storage.disallowedTags.includes(name) || storage.defaultBehaviorTags,
-      attr: (name, value) => storage.allowedAttributes.includes(name) && !storage.disallowedAttributes.includes(name) || storage.defaultBehaviorAttributes,
+      idName: (name) => assessSelector(name, storage.allowedIDs, "exact", storage.disallowedIDs, "exact", storage.defaultBehaviorIDs),
+      className: (name) => assessSelector(name, storage.allowedClasses, "exact", storage.disallowedClasses, "exact", storage.defaultBehaviorClasses),
+      tagName: (name) => assessSelector(name, storage.allowedTags, "exact", storage.disallowedTags, "exact", storage.defaultBehaviorTags),
+      attr: (name, value) => assessSelector(name, storage.allowedAttributes, "exact", storage.disallowedAttributes, "exact", storage.defaultBehaviorAttributes),
       seedMinLength: 1,
       optimizedMinLength: 2,
       threshold: 1000,
