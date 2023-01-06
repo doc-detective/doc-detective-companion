@@ -40,14 +40,14 @@ function restoreOptions() {
         document.querySelector("#disallowedClasses").value = result.disallowedClasses || "";
         document.querySelector("#disallowedTags").value = result.disallowedTags || "";
         document.querySelector("#disallowedAttributes").value = result.disallowedAttributes || "";
-        document.querySelector("#modeAllowedIDs").value = result.allowedIDs || "exact";
-        document.querySelector("#modeAllowedClasses").value = result.allowedClasses || "exact";
-        document.querySelector("#modeAllowedTags").value = result.allowedTags || "exact";
-        document.querySelector("#modeAllowedAttributes").value = result.allowedAttributes || "exact";
-        document.querySelector("#modeDisallowedIDs").value = result.disallowedIDs || "exact";
-        document.querySelector("#modeDisallowedClasses").value = result.disallowedClasses || "exact";
-        document.querySelector("#modeDisallowedTags").value = result.disallowedTags || "exact";
-        document.querySelector("#modeDisallowedAttributes").value = result.disallowedAttributes || "exact";
+        document.querySelector("#modeAllowedIDs").value = result.modeAllowedIDs || "exact";
+        document.querySelector("#modeAllowedClasses").value = result.modeAllowedClasses || "exact";
+        document.querySelector("#modeAllowedTags").value = result.modeAllowedTags || "exact";
+        document.querySelector("#modeAllowedAttributes").value = result.modeAllowedAttributes || "exact";
+        document.querySelector("#modeDisallowedIDs").value = result.modeDisallowedIDs || "exact";
+        document.querySelector("#modeDisallowedClasses").value = result.modeDisallowedClasses || "exact";
+        document.querySelector("#modeDisallowedTags").value = result.modeDisallowedTags || "exact";
+        document.querySelector("#modeDisallowedAttributes").value = result.modeDisallowedAttributes || "exact";
     }
 
     function onError(error) {
