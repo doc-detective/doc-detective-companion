@@ -51,23 +51,32 @@ function assessSelector(selector, allowlist, allowMode, denylist, denyMode, defa
   let allow;
   let deny;
   let regex;
+  let result;
+
+  console.log({ selector, allowlist, allowMode, denylist, denyMode, defaultBehavior });
 
   if (allowMode === "exact") {
     allow = allowlist.includes(selector);
   } else if (allowMode === "regex") {
-    regex = `/${selector}/g`;
-    allow = allowlist.filter((item) => item.match(regex)).length;
+    for (const item in allowlist) {
+      regex = new RegExp(allowlist[item], "g");
+      result = selector.match(regex);
+      if (result) allow = true;
+    }
   }
 
   if (denyMode === "exact") {
     deny = denylist.includes(selector);
   } else if (denyMode === "regex") {
-    regex = `/${selector}/g`;
-    deny = denylist.filter((item) => item.match(regex)).length;
+    for (const item in denylist) {
+      regex = new RegExp(denylist[item],"g");
+      result = selector.match(regex);
+      if (result) deny = true;
+    }
   }
 
-  if (deny) return false;
   if (allow) return true;
+  if (deny) return false;
   return defaultBehavior;
 }
 
