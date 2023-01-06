@@ -29,7 +29,8 @@ async function loadStorage() {
       "modeDisallowedIDs",
       "modeDisallowedClasses",
       "modeDisallowedTags",
-      "modeDisallowedAttributes"
+      "modeDisallowedAttributes",
+      "customSettings"
     ]
   );
   storage.defaultBehaviorIDs = (storage.defaultBehaviorIDs === "true") ? true : false;
@@ -53,7 +54,7 @@ function assessSelector(selector, allowlist, allowMode, denylist, denyMode, defa
   let regex;
   let result;
 
-  console.log({ selector, allowlist, allowMode, denylist, denyMode, defaultBehavior });
+  // console.log({ selector, allowlist, allowMode, denylist, denyMode, defaultBehavior });
 
   if (allowMode === "exact") {
     allow = allowlist.includes(selector);
@@ -84,7 +85,7 @@ document.addEventListener("click", async (event) => {
   let dialog = document.getElementById("doc-detective");
   if (dialog) {
     let storage = await loadStorage();
-    console.log(storage);
+    // console.log(storage);
     let options = {
       root: document.body,
       idName: (name) => assessSelector(name, storage.allowedIDs, storage.modeAllowedIDs, storage.disallowedIDs, storage.modeDisallowedIDs, storage.defaultBehaviorIDs),

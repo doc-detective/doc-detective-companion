@@ -22,7 +22,8 @@ function saveOptions(e) {
         modeDisallowedIDs: document.querySelector("#modeDisallowedIDs").value,
         modeDisallowedClasses: document.querySelector("#modeDisallowedClasses").value,
         modeDisallowedTags: document.querySelector("#modeDisallowedTags").value,
-        modeDisallowedAttributes: document.querySelector("#modeDisallowedAttributes").value
+        modeDisallowedAttributes: document.querySelector("#modeDisallowedAttributes").value,
+        customOptions: "true"
     });
 }
 
