@@ -1,7 +1,7 @@
 {
   "name": "doc-detective-companion",
   "description": "CSS selector helper and test builder.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "homepage": "https://github.com/hawkeyexl/doc-detective-browser/issues",
   "author": "Manny Silva",
   "repository": {
@@ -54,8 +54,12 @@
     "scss": "./src/**/*.css",
     "scss_bundles": [
       {
-        "src": "./src/dialog.css",
-        "name": "dialog"
+        "name": "dialog",
+        "src": "./src/dialog.css"
+      },
+      {
+        "name": "options",
+        "src": "./src/options.css"
       }
     ],
     "js_bundles": [
@@ -70,6 +74,10 @@
       {
         "name": "content",
         "src": "./src/content.js"
+      },
+      {
+        "name": "options",
+        "src": "./src/options.js"
       },
       {
         "name": "dialog",

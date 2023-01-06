@@ -22,7 +22,7 @@ To find CSS selectors,
 
 ## Future updates
 
-*   Specify preferred IDs, classes, or attributes to use in CSS selectors.
+*   Add options button to Companion dialog.
 *   Build Doc Detective test actions based on CSS selectors.
 *   Build entire Doc Detective tests based on CSS selectors.
 

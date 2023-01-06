@@ -5,9 +5,10 @@
   "homepage_url": "https://github.com/hawkeyexl/doc-detective-companion",
   "chrome": {
     "manifest_version": 3,
-    "version_name": "1.1.0",
+    "version_name": "1.2.0",
     "background": {
-      "service_worker": "background-manifestv3.js"
+      "service_worker": "background-manifestv3.js",
+      "type": "module"
     },
     "action": {
       "default_icon": {
@@ -34,12 +35,13 @@
       "default_title": "__MSG_appName__"
     }
   },
-  "version": "1.1.0",
+  "version": "1.2.0",
   "default_locale": "en",
   "minimum_chrome_version": "88",
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "icons": {
     "128": "assets/img/128x128.png"
@@ -54,11 +56,15 @@
       ]
     }
   ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false,
+    "browser_style": true
+  },
   "browser_specific_settings": {
     "gecko": {
       "id": "{6285a9b3-5204-4d30-9620-0e87f1e9a171}",
       "strict_min_version": "48.0"
     }
   }
-  
 }
