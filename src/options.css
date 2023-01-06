@@ -1,0 +1,69 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    all: revert;
+    background-color: #fff;
+    font-family: "Arial", sans-serif;
+}
+
+h1 {
+    font-size: 16pt;
+    font-weight: 700;
+    margin: 0 0 4pt 0;
+}
+
+h2 {
+    flex: 0 0 100%;
+    font-size: 14pt;
+    font-weight: 700;
+    margin: 8pt 0 4pt 0;
+}
+
+div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.defaultBehavior {
+    flex: 0 0 30%;
+}
+
+.input {
+    flex: 0 0 68%;
+    margin-right: 2%;
+}
+
+.mode {
+    flex: 0 0 30%;
+}
+
+label {
+    font-size: 10pt;
+    width: 100%;
+    margin: 0 0 4px 0;
+}
+
+select,
+input {
+    padding: 2px;
+    margin: 4px 0;
+    border-width: 1px;
+    border-radius: 5px;
+    width: 100%;
+    height: 24px;
+}
+
+p {
+    font-size: 10pt;
+}
+
+button {
+    margin-top: 8pt;
+    font-weight: 700px;
+    height: 35px;
+    width: 100%;
+}
