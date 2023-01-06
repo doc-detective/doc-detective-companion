@@ -14,7 +14,15 @@ function saveOptions(e) {
         disallowedIDs: document.querySelector("#disallowedIDs").value,
         disallowedClasses: document.querySelector("#disallowedClasses").value,
         disallowedTags: document.querySelector("#disallowedTags").value,
-        disallowedAttributes: document.querySelector("#disallowedAttributes").value
+        disallowedAttributes: document.querySelector("#disallowedAttributes").value,
+        modeAllowedIDs: document.querySelector("#modeAllowedIDs").value,
+        modeAllowedClasses: document.querySelector("#modeAllowedClasses").value,
+        modeAllowedTags: document.querySelector("#modeAllowedTags").value,
+        modeAllowedAttributes: document.querySelector("#modeAllowedAttributes").value,
+        modeDisallowedIDs: document.querySelector("#modeDisallowedIDs").value,
+        modeDisallowedClasses: document.querySelector("#modeDisallowedClasses").value,
+        modeDisallowedTags: document.querySelector("#modeDisallowedTags").value,
+        modeDisallowedAttributes: document.querySelector("#modeDisallowedAttributes").value
     });
 }
 
@@ -32,6 +40,14 @@ function restoreOptions() {
         document.querySelector("#disallowedClasses").value = result.disallowedClasses || "";
         document.querySelector("#disallowedTags").value = result.disallowedTags || "";
         document.querySelector("#disallowedAttributes").value = result.disallowedAttributes || "";
+        document.querySelector("#modeAllowedIDs").value = result.allowedIDs || "exact";
+        document.querySelector("#modeAllowedClasses").value = result.allowedClasses || "exact";
+        document.querySelector("#modeAllowedTags").value = result.allowedTags || "exact";
+        document.querySelector("#modeAllowedAttributes").value = result.allowedAttributes || "exact";
+        document.querySelector("#modeDisallowedIDs").value = result.disallowedIDs || "exact";
+        document.querySelector("#modeDisallowedClasses").value = result.disallowedClasses || "exact";
+        document.querySelector("#modeDisallowedTags").value = result.disallowedTags || "exact";
+        document.querySelector("#modeDisallowedAttributes").value = result.disallowedAttributes || "exact";
     }
 
     function onError(error) {
@@ -51,7 +67,15 @@ function restoreOptions() {
             "disallowedIDs",
             "disallowedClasses",
             "disallowedTags",
-            "disallowedAttributes"
+            "disallowedAttributes",
+            "modeAllowedIDs",
+            "modeAllowedClasses",
+            "modeAllowedTags",
+            "modeAllowedAttributes",
+            "modeDisallowedIDs",
+            "modeDisallowedClasses",
+            "modeDisallowedTags",
+            "modeDisallowedAttributes"
         ]
     );
     getting.then(setCurrentChoice, onError);

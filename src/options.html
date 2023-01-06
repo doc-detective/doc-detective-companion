@@ -10,38 +10,78 @@
         <div><b>IDs</b><br />
             <label for="defaultBehaviorIDs">Default behavior:
                 <select name="defaultBehaviorIDs" id="defaultBehaviorIDs">
-                    <option value="true">Allow all</option>
+                    <option default value="true">Allow all</option>
                     <option value="false">Disallow all</option>
                 </select></label><br />
             <label>Allowed<input type="text" id="allowedIDs" name="allowedIDs" /></label><br />
+            <label for="modeAllowedIDs">Match type:
+                <select name="modeAllowedIDs" id="modeAllowedIDs">
+                    <option default value="exact">Exact</option>
+                    <option value="regex">Regex</option>
+                </select></label><br />
             <label>Disallowed<input type="text" id="disallowedIDs" name="disallowedIDs" /></label><br />
+            <label for="modeDisallowedIDs">Match type:
+                <select name="modeDisallowedIDs" id="modeDisallowedIDs">
+                    <option default value="exact">Exact</option>
+                    <option value="regex">Regex</option>
+                </select></label><br />
         </div>
         <div><b>Classes</b><br />
             <label for="defaultBehaviorClasses">Default behavior:
                 <select name="defaultBehaviorClasses" id="defaultBehaviorClasses">
-                    <option value="true">Allow all</option>
+                    <option default value="true">Allow all</option>
                     <option value="false">Disallow all</option>
                 </select></label><br />
             <label>Allowed<input type="text" id="allowedClasses" name="allowedClasses" /></label><br />
+            <label for="modeAllowedClasses">Match type:
+                <select name="modeAllowedClasses" id="modeAllowedClasses">
+                    <option default value="exact">Exact</option>
+                    <option value="regex">Regex</option>
+                </select></label><br />
             <label>Disallowed<input type="text" id="disallowedClasses" name="disallowedClasses" /></label><br />
+            <label for="modeDisallowedClasses">Match type:
+                <select name="modeDisallowedClasses" id="modeDisallowedClasses">
+                    <option default value="exact">Exact</option>
+                    <option value="regex">Regex</option>
+                </select></label><br />
         </div>
         <div><b>Tags</b><br />
             <label for="defaultBehaviorTags">Default behavior:
                 <select name="defaultBehaviorTags" id="defaultBehaviorTags">
-                    <option value="true">Allow all</option>
+                    <option default value="true">Allow all</option>
                     <option value="false">Disallow all</option>
                 </select></label><br />
             <label>Allowed<input type="text" id="allowedTags" name="allowedTags" /></label><br />
+            <label for="modeAllowedTags">Match type:
+                <select name="modeAllowedTags" id="modeAllowedTags">
+                    <option default value="exact">Exact</option>
+                    <option value="regex">Regex</option>
+                </select></label><br />
             <label>Disallowed<input type="text" id="disallowedTags" name="disallowedTags" /></label><br />
+            <label for="modeDisallowedTags">Match type:
+                <select name="modeDisallowedTags" id="modeDisallowedTags">
+                    <option default value="exact">Exact</option>
+                    <option value="regex">Regex</option>
+                </select></label><br />
         </div>
         <div><b>Attributes</b><br />
             <label for="defaultBehaviorAttributes">Default behavior:
                 <select name="defaultBehaviorAttributes" id="defaultBehaviorAttributes">
-                    <option value="true">Allow all</option>
+                    <option default value="true">Allow all</option>
                     <option value="false">Disallow all</option>
                 </select></label><br />
             <label>Allowed<input type="text" id="allowedAttributes" name="allowedAttributes" /></label><br />
+            <label for="modeAllowedAttributes">Match type:
+                <select name="modeAllowedAttributes" id="modeAllowedAttributes">
+                    <option default value="exact">Exact</option>
+                    <option value="regex">Regex</option>
+                </select></label><br />
             <label>Disallowed<input type="text" id="disallowedAttributes" name="disallowedAttributes" /></label><br />
+            <label for="modeDisallowedAttributes">Match type:
+                <select name="modeDisallowedAttributes" id="modeDisallowedAttributes">
+                    <option default value="exact">Exact</option>
+                    <option value="regex">Regex</option>
+                </select></label><br />
         </div>
         <button type="submit">Save</button>
     </form>

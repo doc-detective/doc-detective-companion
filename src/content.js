@@ -21,7 +21,15 @@ async function loadStorage() {
       "disallowedIDs",
       "disallowedClasses",
       "disallowedTags",
-      "disallowedAttributes"
+      "disallowedAttributes",
+      "modeAllowedIDs",
+      "modeAllowedClasses",
+      "modeAllowedTags",
+      "modeAllowedAttributes",
+      "modeDisallowedIDs",
+      "modeDisallowedClasses",
+      "modeDisallowedTags",
+      "modeDisallowedAttributes"
     ]
   );
   storage.defaultBehaviorIDs = (storage.defaultBehaviorIDs === "true") ? true : false;
@@ -70,10 +78,10 @@ document.addEventListener("click", async (event) => {
     console.log(storage);
     let options = {
       root: document.body,
-      idName: (name) => assessSelector(name, storage.allowedIDs, "exact", storage.disallowedIDs, "exact", storage.defaultBehaviorIDs),
-      className: (name) => assessSelector(name, storage.allowedClasses, "exact", storage.disallowedClasses, "exact", storage.defaultBehaviorClasses),
-      tagName: (name) => assessSelector(name, storage.allowedTags, "exact", storage.disallowedTags, "exact", storage.defaultBehaviorTags),
-      attr: (name, value) => assessSelector(name, storage.allowedAttributes, "exact", storage.disallowedAttributes, "exact", storage.defaultBehaviorAttributes),
+      idName: (name) => assessSelector(name, storage.allowedIDs, storage.modeAllowedIDs, storage.disallowedIDs, storage.modeDisallowedIDs, storage.defaultBehaviorIDs),
+      className: (name) => assessSelector(name, storage.allowedClasses, storage.modeAllowedClasses, storage.disallowedClasses, storage.modeDisallowedClasses, storage.defaultBehaviorClasses),
+      tagName: (name) => assessSelector(name, storage.allowedTags, storage.modeAllowedTags, storage.disallowedTags, storage.modeDisallowedTags, storage.defaultBehaviorTags),
+      attr: (name, value) => assessSelector(name, storage.allowedAttributes, storage.modeAllowedAttributes, storage.disallowedAttributes, storage.modeDisallowedAttributes, storage.defaultBehaviorAttributes),
       seedMinLength: 1,
       optimizedMinLength: 2,
       threshold: 1000,
