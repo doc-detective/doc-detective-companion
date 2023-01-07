@@ -1,9 +1,28 @@
 var browser = require("webextension-polyfill");
 
-// On extension button click (Chrome - Manifest v3)
-browser.action.onClicked.addListener((tab) => insertDialog(tab));
+// On extension install/update
 browser.runtime.onInstalled.addListener(setDefaultOptions());
 
+// On extension button click (Chrome - Manifest v3)
+browser.action.onClicked.addListener((tab) => insertDialog(tab));
+
+// On message received
+browser.runtime.onMessage.addListener(function (message) {
+  switch (message.action) {
+    case "openOptionsPage":
+      openOptionsPage();
+      break;
+    default:
+      break;
+  }
+});
+
+// Open options page
+function openOptionsPage() {
+  browser.runtime.openOptionsPage();
+}
+
+// Set default options
 async function setDefaultOptions() {
   let options = await browser.storage.sync.get("customOptions");
   if (options.customOptions !== "true") {
