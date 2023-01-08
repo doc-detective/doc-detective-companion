@@ -10,7 +10,6 @@ const dialogBody = `
         </svg>
     </button>
 </div>
-<hr>
 <div id="selector" class="code">
     <p id="selectorDisplay">
     </p>

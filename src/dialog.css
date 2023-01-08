@@ -4,7 +4,7 @@
   z-index: 1000;
   right: 10pt;
   bottom: 10pt;
-  height: 40pt;
+  height: auto;
   width: 200pt;
   background-color: #fff;
   border: 1px solid #939393;
@@ -12,12 +12,31 @@
   font-family: "Arial", sans-serif;
   font-size: 9pt;
   font-weight: 400;
+  display: flex;
+  flex-wrap: wrap;
 }
+
+#doc-detective .heading {
+  flex: 0 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#doc-detective .heading p {
+  flex: 0 0 80%;
+  font-size: 10pt;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  color: #000;
+  margin: auto 0 auto 8px;
+}
+
 #doc-detective #selector {
   color: #000;
+  background-color: #efefef;
+  flex: 0 0 100%;
   display: flex;
-  height: 100%;
-  width: 100%;
+  height: 40px;
   margin: auto;
   align-items: center;
   justify-content: left;
@@ -27,21 +46,31 @@
   right: 0px;
   left: 0px;
 }
+
 #doc-detective p#selectorDisplay {
   margin: 0 20px 0 8px;
-  font-family: "Roboto Mono", monospace;
 }
+
+#doc-detective .settings {
+  margin: auto 2px auto auto;
+  height: 18px;
+  width: 18px;
+  flex: 0 0 18px;
+  border: 0;
+  padding: 0;
+}
+
 #doc-detective .copy {
   position: absolute;
-  top: 2px;
+  margin: auto 0;
   right: 2px;
   height: 18px;
   width: 18px;
   border: 0;
   padding: 0;
-  background-color: #fff;
 }
 
-#doc-detective .copy svg {
-    color: black;
+#doc-detective button svg {
+  color: black;
+  background-color: white;
 }
