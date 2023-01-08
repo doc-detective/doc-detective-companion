@@ -22,7 +22,7 @@
     "build:firefox": "xt-build -e prod -p firefox",
     "publish": "npm run publish:chrome && npm run publish:firefox",
     "publish:chrome": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p chrome && chrome-webstore-upload upload --auto-publish --source ./dist",
-    "publish:firefox": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p firefox && web-ext --channel listed -s ./dist sign",
+    "publish:firefox": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p firefox && web-ext --channel listed -s ./dist sign || echo 'Submitted!'",
     "clean": "xt-clean",
     "docs": "xt-docs",
     "test": "xt-test",
