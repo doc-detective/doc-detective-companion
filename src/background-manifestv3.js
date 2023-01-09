@@ -2,7 +2,7 @@ var browser = require("webextension-polyfill");
 
 // On extension install/update
 browser.runtime.onInstalled.addListener((details) => {
-  if (details.reason == "install") {
+  if (details.reason == "install" || details.reason == "update") {
     setDefaultOptions();
   }
 });
