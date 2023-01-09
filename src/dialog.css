@@ -51,6 +51,10 @@
   margin: 0 20px 0 8px;
 }
 
+#doc-detective button svg {
+  color: black;
+}
+
 #doc-detective .settings {
   margin: auto 2px auto auto;
   height: 18px;
@@ -58,6 +62,10 @@
   flex: 0 0 18px;
   border: 0;
   padding: 0;
+}
+
+#doc-detective .settings svg {
+  background-color: white;
 }
 
 #doc-detective .copy {
@@ -70,7 +78,6 @@
   padding: 0;
 }
 
-#doc-detective button svg {
-  color: black;
-  background-color: white;
+#doc-detective .copy svg {
+  background-color: #efefef;
 }

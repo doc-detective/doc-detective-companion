@@ -1,5 +1,12 @@
 var browser = require("webextension-polyfill");
 
+// On extension install/update
+browser.runtime.onInstalled.addListener((details) => {
+  if (details.reason == "install") {
+    setDefaultOptions();
+  }
+});
+
 // On extension button click (Firefox - Manifest v2)
 browser.browserAction.onClicked.addListener((tab) => insertDialog(tab));
 
@@ -43,7 +50,7 @@ async function setDefaultOptions() {
       modeDisallowedIDs: "exact",
       modeDisallowedClasses: "exact",
       modeDisallowedTags: "exact",
-      modeDisallowedAttributes: "exact"
+      modeDisallowedAttributes: "exact",
     });
   }
 }
@@ -52,11 +59,11 @@ function insertDialog(tab) {
   // Inject dialog CSS
   browser.scripting.insertCSS({
     target: { tabId: tab.id },
-    files: ['dialog.css']
+    files: ["dialog.css"],
   });
   // Create or remove dialog
   browser.scripting.executeScript({
     target: { tabId: tab.id },
-    files: ['dialog.js']
+    files: ["dialog.js"],
   });
 }
