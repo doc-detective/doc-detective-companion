@@ -3,40 +3,45 @@ import { finder } from "@medv/finder";
 
 function splitAndTrim(string) {
   if (!string) return [];
-  let result = string.split(",").map(element => element.trim()).filter(element => element !== '');
+  let result = string
+    .split(",")
+    .map((element) => element.trim())
+    .filter((element) => element !== "");
   return result;
 }
 
 async function loadStorage() {
-  let storage = await browser.storage.sync.get(
-    [
-      "defaultBehaviorIDs",
-      "defaultBehaviorClasses",
-      "defaultBehaviorTags",
-      "defaultBehaviorAttributes",
-      "allowedIDs",
-      "allowedClasses",
-      "allowedTags",
-      "allowedAttributes",
-      "disallowedIDs",
-      "disallowedClasses",
-      "disallowedTags",
-      "disallowedAttributes",
-      "modeAllowedIDs",
-      "modeAllowedClasses",
-      "modeAllowedTags",
-      "modeAllowedAttributes",
-      "modeDisallowedIDs",
-      "modeDisallowedClasses",
-      "modeDisallowedTags",
-      "modeDisallowedAttributes",
-      "customSettings"
-    ]
-  );
-  storage.defaultBehaviorIDs = (storage.defaultBehaviorIDs === "true") ? true : false;
-  storage.defaultBehaviorClasses = (storage.defaultBehaviorClasses === "true") ? true : false;
-  storage.defaultBehaviorTags = (storage.defaultBehaviorTags === "true") ? true : false;
-  storage.defaultBehaviorAttributes = (storage.defaultBehaviorAttributes === "true") ? true : false;
+  let storage = await browser.storage.sync.get([
+    "defaultBehaviorIDs",
+    "defaultBehaviorClasses",
+    "defaultBehaviorTags",
+    "defaultBehaviorAttributes",
+    "allowedIDs",
+    "allowedClasses",
+    "allowedTags",
+    "allowedAttributes",
+    "disallowedIDs",
+    "disallowedClasses",
+    "disallowedTags",
+    "disallowedAttributes",
+    "modeAllowedIDs",
+    "modeAllowedClasses",
+    "modeAllowedTags",
+    "modeAllowedAttributes",
+    "modeDisallowedIDs",
+    "modeDisallowedClasses",
+    "modeDisallowedTags",
+    "modeDisallowedAttributes",
+    "customSettings",
+  ]);
+  storage.defaultBehaviorIDs =
+    storage.defaultBehaviorIDs === "true" ? true : false;
+  storage.defaultBehaviorClasses =
+    storage.defaultBehaviorClasses === "true" ? true : false;
+  storage.defaultBehaviorTags =
+    storage.defaultBehaviorTags === "true" ? true : false;
+  storage.defaultBehaviorAttributes =
+    storage.defaultBehaviorAttributes === "true" ? true : false;
   storage.allowedIDs = splitAndTrim(storage.allowedIDs);
   storage.allowedClasses = splitAndTrim(storage.allowedClasses);
   storage.allowedTags = splitAndTrim(storage.allowedTags);
@@ -48,7 +53,14 @@ async function loadStorage() {
   return storage;
 }
 
-function assessSelector(selector, allowlist, allowMode, denylist, denyMode, defaultBehavior) {
+function assessSelector(
+  selector,
+  allowlist,
+  allowMode,
+  denylist,
+  denyMode,
+  defaultBehavior
+) {
   let allow;
   let deny;
   let regex;
@@ -70,7 +82,7 @@ function assessSelector(selector, allowlist, allowMode, denylist, denyMode, defa
     deny = denylist.includes(selector);
   } else if (denyMode === "regex") {
     for (const item in denylist) {
-      regex = new RegExp(denylist[item],"g");
+      regex = new RegExp(denylist[item], "g");
       result = selector.match(regex);
       if (result) deny = true;
     }
@@ -81,6 +93,36 @@ function assessSelector(selector, allowlist, allowMode, denylist, denyMode, defa
   return defaultBehavior;
 }
 
+function buildAction(
+  action,
+  css,
+  waitDuration,
+  matchText,
+  moveMouse,
+  click,
+  typeKeys,
+  typeSpecial
+) {
+  let json = { action };
+  if (css) json.css = css;
+  if (waitDuration) {
+    json.wait = {};
+    json.wait.duration = waitDuration;
+  }
+  if (matchText) {
+    json.matchText = {};
+    json.matchText.text = matchText;
+  }
+  if (moveMouse) json.moveMouse = {};
+  if (click) json.click = {};
+  if (typeKeys || typeSpecial) {
+    json.type = {};
+    if (typeKeys) json.type.keys = typeKeys;
+    if (typeSpecial) json.type.trailingSpecialKey = typeSpecial;
+  }
+  return json;
+}
+
 document.addEventListener("click", async (event) => {
   let dialog = document.getElementById("doc-detective");
   if (dialog) {
@@ -88,10 +130,42 @@ document.addEventListener("click", async (event) => {
     // console.log(storage);
     let options = {
       root: document.body,
-      idName: (name) => assessSelector(name, storage.allowedIDs, storage.modeAllowedIDs, storage.disallowedIDs, storage.modeDisallowedIDs, storage.defaultBehaviorIDs),
-      className: (name) => assessSelector(name, storage.allowedClasses, storage.modeAllowedClasses, storage.disallowedClasses, storage.modeDisallowedClasses, storage.defaultBehaviorClasses),
-      tagName: (name) => assessSelector(name, storage.allowedTags, storage.modeAllowedTags, storage.disallowedTags, storage.modeDisallowedTags, storage.defaultBehaviorTags),
-      attr: (name, value) => assessSelector(name, storage.allowedAttributes, storage.modeAllowedAttributes, storage.disallowedAttributes, storage.modeDisallowedAttributes, storage.defaultBehaviorAttributes),
+      idName: (name) =>
+        assessSelector(
+          name,
+          storage.allowedIDs,
+          storage.modeAllowedIDs,
+          storage.disallowedIDs,
+          storage.modeDisallowedIDs,
+          storage.defaultBehaviorIDs
+        ),
+      className: (name) =>
+        assessSelector(
+          name,
+          storage.allowedClasses,
+          storage.modeAllowedClasses,
+          storage.disallowedClasses,
+          storage.modeDisallowedClasses,
+          storage.defaultBehaviorClasses
+        ),
+      tagName: (name) =>
+        assessSelector(
+          name,
+          storage.allowedTags,
+          storage.modeAllowedTags,
+          storage.disallowedTags,
+          storage.modeDisallowedTags,
+          storage.defaultBehaviorTags
+        ),
+      attr: (name, value) =>
+        assessSelector(
+          name,
+          storage.allowedAttributes,
+          storage.modeAllowedAttributes,
+          storage.disallowedAttributes,
+          storage.modeDisallowedAttributes,
+          storage.defaultBehaviorAttributes
+        ),
       seedMinLength: 1,
       optimizedMinLength: 2,
       threshold: 1000,
@@ -121,8 +195,14 @@ document.addEventListener("click", async (event) => {
     // Exit early if click is in the dialog
     if (inDialog) return;
     let selectorDisplay = document.getElementById("selectorDisplay");
+    let actionDisplay = document.getElementById("actionDisplay");
     event.stopPropagation();
     event.preventDefault();
     selectorDisplay.innerHTML = selector;
+    actionDisplay.innerHTML = JSON.stringify(
+      buildAction("find", selector),
+      null,
+      2
+    );
   }
 });
