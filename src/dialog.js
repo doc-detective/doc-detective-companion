@@ -10,8 +10,8 @@ const dialogBody = `
         </svg>
     </button>
 </div>
-<div id="selector" class="code">
-    <p id="selectorDisplay">
+<div id="selector" class="code container">
+    <p id="selectorDisplay" class="display">selector
     </p>
     <button class="copy">
         <svg viewBox="0 0 24 24">
@@ -19,6 +19,20 @@ const dialogBody = `
                 d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
         </svg>
     </button>
+</div>
+<div id="action" class="code container">
+  <div id="actionSettings">
+  </div>
+  <div id="actionOutput">
+    <pre id="actionDisplay" class="display">action
+    </pre>
+    <button class="copy">
+        <svg viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+        </svg>
+    </button>
+  </div>
 </div>`;
 
 async function toggleDisplay() {
