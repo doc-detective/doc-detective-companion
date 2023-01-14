@@ -11,9 +11,9 @@ const dialogBody = `
     </button>
 </div>
 <div id="selector" class="code container">
-    <p id="selectorDisplay" class="display">selector
-    </p>
-    <button class="copy">
+    <pre id="selectorDisplay" class="display">selector
+    </pre>
+    <button id="selectorCopy" class="copy">
         <svg viewBox="0 0 24 24">
             <path fill="currentColor"
                 d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
@@ -22,11 +22,25 @@ const dialogBody = `
 </div>
 <div id="action" class="code container">
   <div id="actionSettings">
+  <label class="input">Custom wait duration<input type="text" id="wait" name="wait" /></label>
+  <label class="input">Match text<input type="text" id="matchText" name="matchText" /></label>
+  <label for="moveMouse">Move mouse
+  <select name="moveMouse" id="moveMouse">
+      <option default value="exact">True</option>
+      <option value="regex">False</option>
+  </select></label>
+  <label for="click">Click
+  <select name="click" id="click">
+      <option default value="exact">True</option>
+      <option value="regex">False</option>
+  </select></label>
+  <label class="input">Keys to type<input type="text" id="typeKeys" name="typeKeys" /></label>
+  <label class="input">Special trailing key<input type="text" id="typeSpecial" name="typeSpecial" /></label>
   </div>
   <div id="actionOutput">
     <pre id="actionDisplay" class="display">action
     </pre>
-    <button class="copy">
+    <button id="actionCopy" class="copy">
         <svg viewBox="0 0 24 24">
             <path fill="currentColor"
                 d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
@@ -43,12 +57,18 @@ async function toggleDisplay() {
     dialog.id = "doc-detective";
     dialog.innerHTML = dialogBody;
     document.body.appendChild(dialog);
-    const copyButtons = document.querySelectorAll("#doc-detective .copy");
-    for (const button of copyButtons) {
-      button.addEventListener("click", () => { copySelector(); })
-    }
+    const selectorButton = document.querySelector("#doc-detective #selectorCopy");
+      selectorButton.addEventListener("click", () => {
+        copySelector();
+      });
+      const actionButton = document.querySelector("#doc-detective #actionCopy");
+      actionButton.addEventListener("click", () => {
+        copyAction();
+      });
     const settingsButton = document.querySelector("#doc-detective .settings");
-    settingsButton.addEventListener("click", () => { openOptions(); })
+    settingsButton.addEventListener("click", () => {
+      openOptions();
+    });
   } else {
     // If exists, remove it
     dialog.remove();
@@ -57,12 +77,20 @@ async function toggleDisplay() {
 
 function openOptions() {
   browser.runtime.sendMessage({
-    "action": "openOptionsPage"});
+    action: "openOptionsPage",
+  });
 }
 
 function copySelector() {
   const selectorDisplay = document.getElementById("selectorDisplay");
   copyText = selectorDisplay.innerText;
+  navigator.clipboard.writeText(copyText);
+  console.log("Copied the text: " + copyText);
+}
+
+function copyAction() {
+  const actionDisplay = document.getElementById("actionDisplay");
+  copyText = actionDisplay.innerText;
   navigator.clipboard.writeText(copyText);
   console.log("Copied the text: " + copyText);
 }
