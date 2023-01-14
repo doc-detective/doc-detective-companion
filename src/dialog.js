@@ -11,7 +11,7 @@ const dialogBody = `
       />
     </svg>
   </button>
-  <button id="recordStop" class="record">
+  <button style="display:none" id="recordStop" class="record">
     <svg viewBox="0 0 24 24">
       <path
         fill="currentColor"
