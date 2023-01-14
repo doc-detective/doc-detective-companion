@@ -4,7 +4,7 @@
   z-index: 1000;
   right: 10pt;
   bottom: 10pt;
-  height: auto;
+  height: 600px;
   width: 200pt;
   background-color: #fff;
   border: 1px solid #939393;
@@ -20,6 +20,15 @@
   flex: 0 0 100%;
   display: flex;
   flex-wrap: wrap;
+}
+
+#doc-detective .heading button {
+  margin:auto;
+  height: 18px;
+  width: 18px;
+  flex: 0 0 18px;
+  border: 0;
+  padding: 0;
 }
 
 #doc-detective .heading p {
@@ -57,14 +66,9 @@
 
 #doc-detective .settings {
   margin: auto 2px auto auto;
-  height: 18px;
-  width: 18px;
-  flex: 0 0 18px;
-  border: 0;
-  padding: 0;
 }
 
-#doc-detective .settings svg {
+#doc-detective .heading svg {
   background-color: white;
 }
 
