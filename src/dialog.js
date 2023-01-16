@@ -29,7 +29,8 @@ const dialogBody = `
   </button>
 </div>
 <div id="selector" class="code container">
-  <pre id="selectorDisplay" class="display">
+  <div id="selectorToggle"><p>Selector</p></div>
+  <pre id="selectorDisplay" class="display" style="display:none;">
 selector
   </pre>
   <button id="selectorCopy" class="copy">
@@ -42,7 +43,8 @@ selector
   </button>
 </div>
 <div id="action" class="code container">
-  <div id="actionSettings">
+  <div id="actionToggle">Action</div>
+  <div id="actionSettings" class="options" style="display:none;">
     <label class="input"
       >ID<input type="text" id="actionId" name="actionId"
     /></label>
@@ -83,7 +85,7 @@ selector
     /></label>
   </div>
   <div id="actionOutput">
-    <pre id="actionDisplay" class="display">
+    <pre id="actionDisplay" class="display" style="display:none;">
 action
   </pre
     >
@@ -105,7 +107,8 @@ action
     </button>
   </div>
   <div id="test" class="code container">
-    <div id="testSettings">
+  <div id="testToggle">Test</div>
+    <div id="testSettings" class="options" style="display:none;">
       <label class="input"
         >ID<input type="text" id="testId" name="testId"
       /></label>
@@ -130,10 +133,9 @@ action
       /></label>
     </div>
     <div id="testOutput">
-      <pre id="testDisplay" class="display">
+      <pre id="testDisplay" class="display" style="display:none;">
 test
-  </pre
-      >
+  </pre>
       <button id="testCopy" class="copy">
         <svg viewBox="0 0 24 24">
           <path
@@ -155,23 +157,48 @@ async function toggleDisplay() {
     dialog.id = "doc-detective";
     dialog.innerHTML = dialogBody;
     document.body.appendChild(dialog);
-    const selectorButton = document.querySelector(
-      "#doc-detective #selectorCopy"
-    );
-    selectorButton.addEventListener("click", () => {
-      copySelector();
-    });
-    const actionButton = document.querySelector("#doc-detective #actionCopy");
-    actionButton.addEventListener("click", () => {
-      copyAction();
-    });
-    const testButton = document.querySelector("#doc-detective #testCopy");
-    testButton.addEventListener("click", () => {
-      copyAction();
-    });
+    // Header listeners
     const settingsButton = document.querySelector("#doc-detective .settings");
     settingsButton.addEventListener("click", () => {
       openOptions();
+    });
+    // Selector listeners
+    const selectorToggle = document.querySelector(
+      "#doc-detective #selectorToggle"
+    );
+    const selectorDisplay = document.querySelector(
+      "#doc-detective #selectorDisplay"
+    );
+    const selectorButton = document.querySelector(
+      "#doc-detective #selectorCopy"
+    );
+    selectorToggle.addEventListener("click", () => {
+      toggleElementDisplay(selectorDisplay);
+    });
+    selectorButton.addEventListener("click", () => {
+      copySelector();
+    });
+    // Action listeners
+    const actionToggle = document.querySelector("#doc-detective #actionToggle");
+    const actionDisplay = document.querySelector(
+      "#doc-detective #actionDisplay"
+    );
+    const actionButton = document.querySelector("#doc-detective #actionCopy");
+    actionToggle.addEventListener("click", () => {
+      toggleElementDisplay(actionDisplay);
+    });
+    actionButton.addEventListener("click", () => {
+      copyAction();
+    });
+    // Test listeners
+    const testToggle = document.querySelector("#doc-detective #testToggle");
+    const testDisplay = document.querySelector("#doc-detective #testDisplay");
+    const testButton = document.querySelector("#doc-detective #testCopy");
+    testToggle.addEventListener("click", () => {
+      toggleElementDisplay(testDisplay);
+    });
+    testButton.addEventListener("click", () => {
+      copyTest();
     });
   } else {
     // If exists, remove it
@@ -204,6 +231,15 @@ function copyTest() {
   copyText = testDisplay.innerText;
   navigator.clipboard.writeText(copyText);
   console.log("Copied the text: " + copyText);
+}
+
+function toggleElementDisplay(element, displayType) {
+  if (!displayType) displayType = "block";
+  if (element.style.display === "none") {
+    element.style.display = displayType;
+  } else {
+    element.style.display = "none";
+  }
 }
 
 toggleDisplay();
