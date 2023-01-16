@@ -12,8 +12,6 @@
   font-family: "Arial", sans-serif;
   font-size: 9pt;
   font-weight: 400;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 #doc-detective .heading {
@@ -40,14 +38,15 @@
   color: #000;
   margin: auto 0 auto 8px;
 }
-
 #doc-detective .container {
   color: #000;
   background-color: #efefef;
+  display: flex;
+  flex-wrap: wrap;
   flex: 0 0 100%;
   display: flex;
   height: 40px;
-  margin: auto;
+  margin: 0 auto 0 auto;
   align-items: center;
   justify-content: left;
   position: relative;
@@ -56,9 +55,17 @@
   right: 0px;
   left: 0px;
 }
+#doc-detective #selector {
+  max-height: 60px;
+}
 
 #doc-detective .display {
   margin: 0 20px 0 8px;
+  display: none;
+}
+
+#doc-detective .options {
+  display: none;
 }
 
 #doc-detective button svg {
@@ -85,4 +92,20 @@
 
 #doc-detective .copy svg {
   background-color: #efefef;
+}
+
+label {
+  font-size: 10pt;
+  width: 100%;
+  margin: 0 0 4px 0;
+}
+
+select,
+input {
+  padding: 2px;
+  margin: 4px 0;
+  border-width: 1px;
+  border-radius: 5px;
+  width: 100%;
+  height: 24px;
 }
