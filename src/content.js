@@ -120,7 +120,7 @@ function buildAction(
     if (typeKeys) json.type.keys = typeKeys;
     if (typeSpecial) json.type.trailingSpecialKey = typeSpecial;
   }
-  return json;
+  return json;  
 }
 
 document.addEventListener("click", async (event) => {
@@ -194,13 +194,16 @@ document.addEventListener("click", async (event) => {
     }
     // Exit early if click is in the dialog
     if (inDialog) return;
+    // Get action config
+    let element = document.querySelector(selector);
     let selectorDisplay = document.getElementById("selectorDisplay");
     let actionDisplay = document.getElementById("actionDisplay");
     event.stopPropagation();
     event.preventDefault();
     selectorDisplay.innerHTML = selector;
     actionDisplay.innerHTML = JSON.stringify(
-      buildAction("find", selector),
+      // Update with action config
+      buildAction("find", selector, null, element.textContent),
       null,
       2
     );
