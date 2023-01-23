@@ -24,7 +24,6 @@ To find CSS selectors,
 
 ## Future updates
 
-*   Add options button to Companion dialog.
 *   Build Doc Detective test actions based on CSS selectors.
 *   Build entire Doc Detective tests based on CSS selectors.
 
