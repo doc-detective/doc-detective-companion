@@ -1,53 +1,6 @@
 var browser = require("webextension-polyfill");
 import { finder } from "@medv/finder";
 
-function splitAndTrim(string) {
-  if (!string) return [];
-  let result = string.split(",").map(element => element.trim()).filter(element => element !== '');
-  return result;
-}
-
-async function loadStorage() {
-  let storage = await browser.storage.sync.get(
-    [
-      "defaultBehaviorIDs",
-      "defaultBehaviorClasses",
-      "defaultBehaviorTags",
-      "defaultBehaviorAttributes",
-      "allowedIDs",
-      "allowedClasses",
-      "allowedTags",
-      "allowedAttributes",
-      "disallowedIDs",
-      "disallowedClasses",
-      "disallowedTags",
-      "disallowedAttributes",
-      "modeAllowedIDs",
-      "modeAllowedClasses",
-      "modeAllowedTags",
-      "modeAllowedAttributes",
-      "modeDisallowedIDs",
-      "modeDisallowedClasses",
-      "modeDisallowedTags",
-      "modeDisallowedAttributes",
-      "customSettings"
-    ]
-  );
-  storage.defaultBehaviorIDs = (storage.defaultBehaviorIDs === "true") ? true : false;
-  storage.defaultBehaviorClasses = (storage.defaultBehaviorClasses === "true") ? true : false;
-  storage.defaultBehaviorTags = (storage.defaultBehaviorTags === "true") ? true : false;
-  storage.defaultBehaviorAttributes = (storage.defaultBehaviorAttributes === "true") ? true : false;
-  storage.allowedIDs = splitAndTrim(storage.allowedIDs);
-  storage.allowedClasses = splitAndTrim(storage.allowedClasses);
-  storage.allowedTags = splitAndTrim(storage.allowedTags);
-  storage.allowedAttributes = splitAndTrim(storage.allowedAttributes);
-  storage.disallowedIDs = splitAndTrim(storage.disallowedIDs);
-  storage.disallowedClasses = splitAndTrim(storage.disallowedClasses);
-  storage.disallowedTags = splitAndTrim(storage.disallowedTags);
-  storage.disallowedAttributes = splitAndTrim(storage.disallowedAttributes);
-  return storage;
-}
-
 function assessSelector(selector, allowlist, allowMode, denylist, denyMode, defaultBehavior) {
   let allow;
   let deny;
@@ -84,7 +37,7 @@ function assessSelector(selector, allowlist, allowMode, denylist, denyMode, defa
 document.addEventListener("click", async (event) => {
   let dialog = document.getElementById("doc-detective");
   if (dialog) {
-    let storage = await loadStorage();
+    let storage = JSON.parse(document.getElementById("storage").innerHTML);
     // console.log(storage);
     let options = {
       root: document.body,
