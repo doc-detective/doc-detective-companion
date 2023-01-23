@@ -1,5 +1,7 @@
 # Doc Detective Companion
 
+![Discord Shield](https://discordapp.com/api/guilds/1066417654899937453/widget.png?style=shield)
+
 A browser extension to find short, unique CSS selectors for use in [Doc Detective](https://github.com/hawkeyexl/doc-detective) tests.
 
 ## Install
