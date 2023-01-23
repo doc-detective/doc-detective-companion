@@ -1,5 +1,8 @@
 # Doc Detective Companion
 
+![Current version](https://img.shields.io/github/package-json/v/doc-detective/doc-detective-companion?color=orange)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/dfpbndchffmilddiaccdcpoejljlaghm)](https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm)
+[![Firefox Addons Shield](https://img.shields.io/amo/v/doc-detective-companion?label=firefox%20addons)](https://addons.mozilla.org/en-US/firefox/addon/doc-detective-companion)
 [![Discord Shield](https://discordapp.com/api/guilds/1066417654899937453/widget.png?style=shield)](https://discord.gg/mSCCRAhH)
 
 A browser extension to find short, unique CSS selectors for use in [Doc Detective](https://github.com/hawkeyexl/doc-detective) tests.
@@ -8,7 +11,7 @@ A browser extension to find short, unique CSS selectors for use in [Doc Detectiv
 
 Get the extension from your browser's applicable store, or build and install [development](#develop) versions:
 
-*   Chrome/Edge: [Chrome Webstore](https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm)
+*   Chrome/Edge: [Chrome Web Store](https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm)
 *   Firefox: [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/doc-detective-companion)
 *   Safari: Unavailable on the Mac App Store. (If someone wants to sponsor yearly Apple Developer registration fees, contact me.) Build a local [development](#develop) version.
 
