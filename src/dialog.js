@@ -19,6 +19,8 @@ const dialogBody = `
                 d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
         </svg>
     </button>
+</div>
+<div id="storage" style="display:none;">
 </div>`;
 
 async function toggleDisplay() {
@@ -29,6 +31,10 @@ async function toggleDisplay() {
     dialog.id = "doc-detective";
     dialog.innerHTML = dialogBody;
     document.body.appendChild(dialog);
+    let storage = document.getElementById("storage");
+    let storageSync = await loadStorage();
+    console.log(storageSync);
+    storage.innerHTML = JSON.stringify(storageSync);
     const copyButtons = document.querySelectorAll("#doc-detective .copy");
     for (const button of copyButtons) {
       button.addEventListener("click", () => { copySelector(); })
@@ -39,6 +45,53 @@ async function toggleDisplay() {
     // If exists, remove it
     dialog.remove();
   }
+}
+
+async function loadStorage() {
+  let storage = await browser.storage.sync.get(
+    [
+      "defaultBehaviorIDs",
+      "defaultBehaviorClasses",
+      "defaultBehaviorTags",
+      "defaultBehaviorAttributes",
+      "allowedIDs",
+      "allowedClasses",
+      "allowedTags",
+      "allowedAttributes",
+      "disallowedIDs",
+      "disallowedClasses",
+      "disallowedTags",
+      "disallowedAttributes",
+      "modeAllowedIDs",
+      "modeAllowedClasses",
+      "modeAllowedTags",
+      "modeAllowedAttributes",
+      "modeDisallowedIDs",
+      "modeDisallowedClasses",
+      "modeDisallowedTags",
+      "modeDisallowedAttributes",
+      "customSettings"
+    ]
+  );
+  storage.defaultBehaviorIDs = (storage.defaultBehaviorIDs === "true") ? true : false;
+  storage.defaultBehaviorClasses = (storage.defaultBehaviorClasses === "true") ? true : false;
+  storage.defaultBehaviorTags = (storage.defaultBehaviorTags === "true") ? true : false;
+  storage.defaultBehaviorAttributes = (storage.defaultBehaviorAttributes === "true") ? true : false;
+  storage.allowedIDs = splitAndTrim(storage.allowedIDs);
+  storage.allowedClasses = splitAndTrim(storage.allowedClasses);
+  storage.allowedTags = splitAndTrim(storage.allowedTags);
+  storage.allowedAttributes = splitAndTrim(storage.allowedAttributes);
+  storage.disallowedIDs = splitAndTrim(storage.disallowedIDs);
+  storage.disallowedClasses = splitAndTrim(storage.disallowedClasses);
+  storage.disallowedTags = splitAndTrim(storage.disallowedTags);
+  storage.disallowedAttributes = splitAndTrim(storage.disallowedAttributes);
+  return storage;
+}
+
+function splitAndTrim(string) {
+  if (!string) return [];
+  let result = string.split(",").map(element => element.trim()).filter(element => element !== '');
+  return result;
 }
 
 function openOptions() {
