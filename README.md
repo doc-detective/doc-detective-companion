@@ -29,6 +29,7 @@ To find CSS selectors,
 
 *   Build Doc Detective test actions based on CSS selectors.
 *   Build entire Doc Detective tests based on CSS selectors.
+*   Build entire Doc Detective tests based on browser interactions.
 
 ## Develop
 
