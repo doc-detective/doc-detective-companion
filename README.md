@@ -3,7 +3,7 @@
 ![Current version](https://img.shields.io/github/package-json/v/doc-detective/doc-detective-companion?color=orange)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/dfpbndchffmilddiaccdcpoejljlaghm)](https://chrome.google.com/webstore/detail/doc-detective-companion/dfpbndchffmilddiaccdcpoejljlaghm)
 [![Firefox Addons Shield](https://img.shields.io/amo/v/doc-detective-companion?label=firefox%20addons)](https://addons.mozilla.org/en-US/firefox/addon/doc-detective-companion)
-[![Discord Shield](https://discordapp.com/api/guilds/1066417654899937453/widget.png?style=shield)](https://discord.gg/mSCCRAhH)
+[![Discord Shield](https://img.shields.io/badge/chat-on%20discord-purple)](https://discord.gg/mSCCRAhH)
 
 A browser extension to find short, unique CSS selectors for use in [Doc Detective](https://github.com/hawkeyexl/doc-detective) tests.
 
