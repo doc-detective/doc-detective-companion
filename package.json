@@ -1,7 +1,7 @@
 {
   "name": "doc-detective-companion",
   "description": "CSS selector helper and test builder.",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "homepage": "https://github.com/hawkeyexl/doc-detective-browser/issues",
   "author": "Manny Silva",
   "repository": {
@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "npm run start:chrome",
+    "start": "npm run start:firefox",
     "start:chrome": "xt-build -e dev -p chrome -w",
     "start:firefox": "xt-build -e dev -p firefox -w",
     "start:safari": "xt-build -e dev -p firefox && xcrun --run safari-web-extension-converter --macos-only --copy-resources --force --no-open --project-location ./dist ./dist && cd './dist/Doc Detective Companion' && xcodebuild build && './build/Release/Doc Detective Companion.app/Contents/MacOS/Doc Detective Companion'",
@@ -86,8 +86,8 @@
     ]
   },
   "dependencies": {
-    "@medv/finder": "^2.1.0",
-    "chrome-webstore-upload-cli": "^2.1.0",
-    "web-ext": "^7.4.0"
+    "@medv/finder": "^3.1.0",
+    "chrome-webstore-upload-cli": "^2.2.2",
+    "web-ext": "^7.8.0"
   }
 }
