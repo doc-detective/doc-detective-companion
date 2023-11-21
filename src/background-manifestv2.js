@@ -8,7 +8,10 @@ browser.runtime.onInstalled.addListener((details) => {
 });
 
 // On extension button click (Firefox - Manifest v2)
-browser.browserAction.onClicked.addListener((tab) => insertDialog(tab));
+// browser.browserAction.onClicked.addListener((tab) => insertDialog(tab));
+browser.browserAction.onClicked.addListener((tab) => {
+  browser.tabs.sendMessage(tab.id, { action: "togglePanel" });
+});
 
 // On message received
 browser.runtime.onMessage.addListener(function (message) {
