@@ -28,7 +28,7 @@ function App() {
     <Box>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6">Doc Detective Companion</Typography>
+          <Typography variant="h6" style={{flexGrow: 1}}>Doc Detective Companion</Typography>
           <IconButton color="inherit" edge="end" aria-label="settings">
             <SettingsIcon />
           </IconButton>
