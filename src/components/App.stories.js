@@ -4,8 +4,15 @@ import App from './App.js';
 export default {
   title: 'Doc Detective Companion/App',
   component: App,
-  // args at the component level for all stories.
+  decorators: [
+    (Story) => (
+      <div style={{ width: '300px' }}>
+        <Story />
+      </div>
+    ),
+  ],
   tags: ["autodocs"],
+    // args at the component level for all stories.
   args: {
   }
 };
