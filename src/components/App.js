@@ -13,6 +13,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 import HandymanIcon from "@mui/icons-material/Handyman";
+// import { openOptions } from "../utils.js";
+
 
 function App() {
   const [mode, setMode] = useState("search");
@@ -24,7 +26,7 @@ function App() {
       setOutput(newMode === "search" ? "CSS Selector" : "Array");
     }
   };
-
+  
   const closePanel = () => {
     const id = "doc-detective";
     const width = 350;
@@ -41,14 +43,15 @@ function App() {
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             Doc Detective
           </Typography>
-          <IconButton
+          {/* <IconButton
             color="inherit"
             style={{ margin: "auto" }}
             edge="end"
             aria-label="settings"
+            onClick={openOptions}
           >
             <SettingsIcon />
-          </IconButton>
+          </IconButton> */}
           <IconButton
             color="inherit"
             edge="end"
