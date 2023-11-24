@@ -24,6 +24,7 @@
     "publish": "npm run publish:firefox && npm run publish:chrome",
     "publish:chrome": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p chrome && chrome-webstore-upload upload --auto-publish --source ./dist",
     "publish:firefox": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p firefox && web-ext --channel listed -s ./dist sign || echo 'Submitted!'",
+    "watch": "nodemon --watch src/components --exec \"npm run build:react && npm run start\"",
     "clean": "xt-clean",
     "docs": "xt-docs",
     "test": "xt-test",
@@ -95,6 +96,7 @@
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
     "chrome-webstore-upload-cli": "^2.2.2",
+    "copy-webpack-plugin": "^11.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "web-ext": "^7.8.0"
