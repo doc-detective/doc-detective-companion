@@ -51,7 +51,7 @@
   },
   "content_scripts": [
     {
-      "js": ["content.js"],
+      "js": ["bundle.js"],
       "matches": ["<all_urls>"]
     }
   ],
