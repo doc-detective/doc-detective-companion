@@ -8,13 +8,16 @@ import {
   Box,
   IconButton,
 } from "@mui/material";
+import Search from "./Search.js";
 import SearchIcon from "@mui/icons-material/Search";
 // import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 import HandymanIcon from "@mui/icons-material/Handyman";
-// import { openOptions } from "../utils.js";
 
+// TODO: Rebuild options page in React
+// TODO: Get "Search" working
+// TODO: Get "Build" working`
 
 function App() {
   const [mode, setMode] = useState("search");
@@ -26,7 +29,7 @@ function App() {
       setOutput(newMode === "search" ? "CSS Selector" : "Array");
     }
   };
-  
+
   const closePanel = () => {
     const id = "doc-detective";
     const width = 350;
@@ -43,15 +46,19 @@ function App() {
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             Doc Detective
           </Typography>
-          {/* <IconButton
+          <IconButton
             color="inherit"
             style={{ margin: "auto" }}
             edge="end"
             aria-label="settings"
-            onClick={openOptions}
+            onClick={() => {
+              browser.runtime.sendMessage({
+                action: "openOptionsPage",
+              });
+            }}
           >
             <SettingsIcon />
-          </IconButton> */}
+          </IconButton>
           <IconButton
             color="inherit"
             edge="end"
@@ -84,9 +91,13 @@ function App() {
         />
       </Tabs>
 
-      <Typography variant="h6" sx={{ marginTop: 2 }}>
-        Output: {output}
-      </Typography>
+      {mode === "search" && <Search />}
+
+      {mode === "build" && (
+        <Typography variant="h6" sx={{ marginTop: 2 }}>
+          Build: {output}
+        </Typography>
+      )}
     </Box>
   );
 }
