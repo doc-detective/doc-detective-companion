@@ -57,16 +57,3 @@ async function setDefaultOptions() {
     });
   }
 }
-
-function insertDialog(tab) {
-  // Inject dialog CSS
-  browser.scripting.insertCSS({
-    target: { tabId: tab.id },
-    files: ["dialog.css"],
-  });
-  // Create or remove dialog
-  browser.scripting.executeScript({
-    target: { tabId: tab.id },
-    files: ["dialog.js"],
-  });
-}

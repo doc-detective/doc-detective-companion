@@ -6,7 +6,7 @@ export default {
   component: App,
   decorators: [
     (Story) => (
-      <div style={{ width: '300px' }}>
+      <div style={{ width: '350px' }}>
         <Story />
       </div>
     ),
