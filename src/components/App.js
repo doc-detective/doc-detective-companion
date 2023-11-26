@@ -14,7 +14,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 import HandymanIcon from "@mui/icons-material/Handyman";
-import JSONBlock from "./JSONBlock.js";
+import Block from "./Block.js";
 
 // TODO: Rebuild options page in React
 // TODO: Get "Search" working
@@ -271,7 +271,7 @@ function App() {
         />
       </Tabs>
 
-      {mode === "search" && <JSONBlock object={selector} options={{wrapLines: true, language: "text", showLineNumbers: false}} />}
+      {mode === "search" && <Block object={selector} options={{wrapLines: true, language: "text", showLineNumbers: false}} />}
 
       {mode === "build" && (
         <Typography variant="h6" sx={{ marginTop: 2 }}>

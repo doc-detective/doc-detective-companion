@@ -1,9 +1,9 @@
-import JSONBlock from './JSONBlock';
+import Block from './Block';
 
 // This default export determines where your story goes in the story list.
 export default {
-  title: 'Doc Detective/JSONBlock',
-  component: JSONBlock,
+  title: 'Doc Detective/Block',
+  component: Block,
   // args at the component level for all stories.
   args: {
     object: {
