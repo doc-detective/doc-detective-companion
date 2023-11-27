@@ -117,12 +117,23 @@ function splitAndTrim(string) {
 function App() {
   const [mode, setMode] = useState("search");
   const [output, setOutput] = useState("");
-  const [storage, setStorage] = useState(loadStorage);
+  const [storage, setStorage] = useState(null);
   const [selector, setSelector] = useState("");
 
+  // Run once on load
   useEffect(() => {
-    console.log({ selector });
-  }, [selector]);
+    // Load storage
+    const fetchData = async () => {
+      const result = await loadStorage();
+      setStorage(result);
+    };
+    fetchData();
+  }, []);
+
+  // Debug
+  // useEffect(() => {
+  //   console.log(storage);
+  // }, [storage]);
 
   const handleModeChange = (event, newMode) => {
     if (newMode !== null) {
