@@ -1,30 +1,40 @@
 import React, { useState } from 'react';
 import { CopyBlock, nord } from "react-code-blocks";
-// import { Switch, FormControlLabel } from "@mui/material";
+import { Switch, FormControlLabel } from "@mui/material";
 
-const Block = ({object, multiline}) => {
+const Block = ({object, options}) => {
     // Prop definitions.
     // object: The object to display.
     // multiline: Whether to display the object as a single line or multiline.
 
     // Set up state.
-    const [isMultiline, setMultiline] = useState(multiline);
+    const [isMultiline, setMultiline] = useState(options?.multiline !== undefined ? options.multiline : true);
+    const [visibleMultilineSelector, setVisibleMultilineSelector] = useState(options?.visibleMultilineSelector !== undefined ? options.visibleMultilineSelector : false);
+    const [language, setLanguage] = useState(options?.language !== undefined ? options.language : "json");
+
+    console.log(language)
 
     // Run custom logic.
-    const text = isMultiline ? JSON.stringify(object, null, 2) : JSON.stringify(object);
-
+    let text;
+    if (language === "json") {
+      text = isMultiline ? JSON.stringify(object, null, 2) : JSON.stringify(object);
+    } else {
+      text = object;
+    }
+  
     // Return the component.
     return (
         <div className="json-preview">
+            {options && <h3>{language}</h3>}
             <CopyBlock
                 text={text}
-                language="json"
+                language={language}
                 showLineNumbers={true}
                 theme={nord}
                 wrapLines={true}
                 codeBlock
             />
-            {/* <FormControlLabel
+            {visibleMultilineSelector && <FormControlLabel
                 labelPlacement="start"
                 label="Multiline"
                 control={
@@ -34,7 +44,7 @@ const Block = ({object, multiline}) => {
                         inputProps={{ 'aria-label': 'Toggle multiline state.' }}
                     />
                 }
-            /> */}
+            />}
         </div>
     );
 }
