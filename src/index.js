@@ -31,7 +31,7 @@ function togglePanel() {
   } else {
     panel = document.createElement("div");
     panel.id = id;
-    panel.style = "revert: all; position: fixed; z-index: 1000; top: 0; right: 0; width: 250px; height: 100vh; overflow-y: auto; background-color: white; box-shadow: 2px 0 5px rgba(0,0,0,0.5);";
+    panel.style = `revert: all; position: fixed; z-index: 1000; top: 0; right: 0; width: ${width}px; height: 100vh; overflow-y: auto; background-color: white; box-shadow: 2px 0 5px rgba(0,0,0,0.5);`;
     document.body.appendChild(panel);
     const margin = document.body.style.marginRight.replace("px", "");
     document.body.style.marginRight = margin ? `${margin + width}px` : `${width}px`;
