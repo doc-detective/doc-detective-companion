@@ -24,7 +24,7 @@
     "publish": "npm run publish:firefox && npm run publish:chrome",
     "publish:chrome": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p chrome && chrome-webstore-upload upload --auto-publish --source ./dist",
     "publish:firefox": "export $(grep -v '^#' .env | xargs) && xt-build -e dev -p firefox && web-ext --channel listed -s ./dist sign || echo 'Submitted!'",
-    "watch": "nodemon --watch src/components --exec \"npm run build:react && npm run start\"",
+    "watch": "nodemon --watch src/components --watch src/index.js --exec \"npm run build:react && npm run start\"",
     "clean": "xt-clean",
     "docs": "xt-docs",
     "test": "xt-test",
