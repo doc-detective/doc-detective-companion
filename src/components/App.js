@@ -16,6 +16,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import HandymanIcon from "@mui/icons-material/Handyman";
 import Block from "./Block.js";
 
+const resetStyles = {
+  all: "initial",
+  fontFamily: "inherit",
+  fontSize: "100%",
+  boxSizing: "border-box",
+};
+
 // TODO: Rebuild options page in React
 // TODO: Get "Search" working
 // TODO: Get "Build" working`
@@ -154,7 +161,7 @@ function App() {
 
   const processEvent = (event) => {
     const panel = document.getElementById("doc-detective");
-    
+
     if (mode === "search") {
       let options = {
         root: document.body,
@@ -231,65 +238,80 @@ function App() {
   document.addEventListener("click", processEvent);
 
   return (
-    <Box>
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Doc Detective
+    <div style={resetStyles}>
+      <Box>
+        <AppBar position="static">
+          <Toolbar variant="dense">
+            <Typography variant="h6" style={{ flexGrow: 1 }}>
+              Doc Detective
+            </Typography>
+            <IconButton
+              color="inherit"
+              style={{ margin: "auto" }}
+              edge="end"
+              aria-label="settings"
+              onClick={() => {
+                browser.runtime.sendMessage({
+                  action: "openOptionsPage",
+                });
+              }}
+            >
+              <SettingsIcon />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              edge="end"
+              aria-label="close"
+              onClick={closePanel}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+
+        <Tabs
+          value={mode}
+          disableGutters
+          onChange={handleModeChange}
+          aria-label="Mode"
+          centered
+        >
+          <Tab
+            value="search"
+            style={{ flexGrow: 1, maxWidth: "50%" }}
+            icon={<SearchIcon />}
+            label="Search"
+          />
+          <Tab
+            value="build"
+            style={{ flexGrow: 1, maxWidth: "50%" }}
+            icon={<HandymanIcon />}
+            label="Build"
+          />
+        </Tabs>
+
+        {mode === "search" && (
+          <div>
+            <Typography sx={{ marginTop: 2 }}>
+              Find the shortest CSS selector for elements you click on.
+            </Typography>
+            <Block
+              object={selector}
+              options={{
+                wrapLines: true,
+                language: "text",
+                showLineNumbers: false,
+              }}
+            />
+          </div>
+        )}
+        {mode === "build" && (
+          <Typography variant="h6" sx={{ marginTop: 2 }}>
+            Build: {output}
           </Typography>
-          <IconButton
-            color="inherit"
-            style={{ margin: "auto" }}
-            edge="end"
-            aria-label="settings"
-            onClick={() => {
-              browser.runtime.sendMessage({
-                action: "openOptionsPage",
-              });
-            }}
-          >
-            <SettingsIcon />
-          </IconButton>
-          <IconButton
-            color="inherit"
-            edge="end"
-            aria-label="close"
-            onClick={closePanel}
-          >
-            <CloseIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
-      <Tabs
-        value={mode}
-        disableGutters
-        onChange={handleModeChange}
-        aria-label="Mode"
-        centered
-      >
-        <Tab
-          value="search"
-          style={{ flexGrow: 1, maxWidth: "50%" }}
-          icon={<SearchIcon />}
-          label="Search"
-        />
-        <Tab
-          value="build"
-          style={{ flexGrow: 1, maxWidth: "50%" }}
-          icon={<HandymanIcon />}
-          label="Build"
-        />
-      </Tabs>
-
-      {mode === "search" && <Block object={selector} options={{wrapLines: true, language: "text", showLineNumbers: false}} />}
-
-      {mode === "build" && (
-        <Typography variant="h6" sx={{ marginTop: 2 }}>
-          Build: {output}
-        </Typography>
-      )}
-    </Box>
+        )}
+      </Box>
+    </div>
   );
 }
 
