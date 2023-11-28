@@ -12,24 +12,22 @@ const Block = ({object, options}) => {
     const [visibleMultilineSelector, setVisibleMultilineSelector] = useState(options?.visibleMultilineSelector !== undefined ? options.visibleMultilineSelector : false);
     const [language, setLanguage] = useState(options?.language !== undefined ? options.language : "json");
 
-    console.log(language)
-
     // Run custom logic.
     let text;
     if (language === "json") {
       text = isMultiline ? JSON.stringify(object, null, 2) : JSON.stringify(object);
     } else {
-      text = object;
+      text = object || " ";
     }
   
     // Return the component.
     return (
-        <div className="json-preview">
-            {options && <h3>{language}</h3>}
+        <div className="block">
             <CopyBlock
+                customStyle={{ minHeight: "28px" }}
                 text={text}
                 language={language}
-                showLineNumbers={true}
+                showLineNumbers={false}
                 theme={nord}
                 wrapLines={true}
                 codeBlock
