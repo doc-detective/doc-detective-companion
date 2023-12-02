@@ -126,6 +126,7 @@ function App() {
   const [output, setOutput] = useState("");
   const [storage, setStorage] = useState(null);
   const [selector, setSelector] = useState("");
+  const [events, setEvents] = useState([]);
 
   // Run once on load
   useEffect(() => {
@@ -135,7 +136,21 @@ function App() {
       setStorage(result);
     };
     fetchData();
+    // Get initial state
+    browser.runtime.sendMessage({ action: "getState" }).then((response) => {
+      if (response) {
+        setEvents(response.events);
+        setMode(response.mode);
+      }
+    });
   }, []);
+
+  // Update state in background service worker
+  useEffect(() => {
+    const state = { mode, events, visible: true };
+    // console.log(state);
+    browser.runtime.sendMessage({ action: "setState", state });
+  }, [events, mode]);
 
   // Debug
   // useEffect(() => {
@@ -160,78 +175,92 @@ function App() {
   };
 
   const processEvent = (event) => {
+    console.log(event)
     const panel = document.getElementById("doc-detective");
-
-    if (mode === "search") {
-      let options = {
-        root: document.body,
-        idName: (name) =>
-          assessSelector(
-            name,
-            storage.allowedIDs,
-            storage.modeAllowedIDs,
-            storage.disallowedIDs,
-            storage.modeDisallowedIDs,
-            storage.defaultBehaviorIDs
-          ),
-        className: (name) =>
-          assessSelector(
-            name,
-            storage.allowedClasses,
-            storage.modeAllowedClasses,
-            storage.disallowedClasses,
-            storage.modeDisallowedClasses,
-            storage.defaultBehaviorClasses
-          ),
-        tagName: (name) =>
-          assessSelector(
-            name,
-            storage.allowedTags,
-            storage.modeAllowedTags,
-            storage.disallowedTags,
-            storage.modeDisallowedTags,
-            storage.defaultBehaviorTags
-          ),
-        attr: (name, value) =>
-          assessSelector(
-            name,
-            storage.allowedAttributes,
-            storage.modeAllowedAttributes,
-            storage.disallowedAttributes,
-            storage.modeDisallowedAttributes,
-            storage.defaultBehaviorAttributes
-          ),
-        seedMinLength: 1,
-        optimizedMinLength: 2,
-        threshold: 1000,
-        maxNumberOfTries: 10_000,
-      };
-      const foundSelector = finder(event.target, options);
-      // Loop to identify if foundSelector is part of main page
-      let inDialog = false;
-      let elements = [];
-      elements[0] = document.querySelector(foundSelector);
-      for (let i = 0; i < elements.length; i++) {
-        let element = elements[i];
-        let parent = element.parentElement;
-        let parentName = parent.nodeName.toLowerCase();
-        if (parentName !== "body") {
-          elements.push(parent);
-          continue;
-        }
-        if (
-          parentName === "body" &&
-          element.nodeName.toLowerCase() === "div" &&
-          element.id === "doc-detective"
-        ) {
-          inDialog = true;
-        }
+    let options = {
+      root: document.body,
+      idName: (name) =>
+        assessSelector(
+          name,
+          storage.allowedIDs,
+          storage.modeAllowedIDs,
+          storage.disallowedIDs,
+          storage.modeDisallowedIDs,
+          storage.defaultBehaviorIDs
+        ),
+      className: (name) =>
+        assessSelector(
+          name,
+          storage.allowedClasses,
+          storage.modeAllowedClasses,
+          storage.disallowedClasses,
+          storage.modeDisallowedClasses,
+          storage.defaultBehaviorClasses
+        ),
+      tagName: (name) =>
+        assessSelector(
+          name,
+          storage.allowedTags,
+          storage.modeAllowedTags,
+          storage.disallowedTags,
+          storage.modeDisallowedTags,
+          storage.defaultBehaviorTags
+        ),
+      attr: (name, value) =>
+        assessSelector(
+          name,
+          storage.allowedAttributes,
+          storage.modeAllowedAttributes,
+          storage.disallowedAttributes,
+          storage.modeDisallowedAttributes,
+          storage.defaultBehaviorAttributes
+        ),
+      seedMinLength: 1,
+      optimizedMinLength: 2,
+      threshold: 1000,
+      maxNumberOfTries: 10_000,
+    };
+    const foundSelector = finder(event.target, options);
+    // Loop to identify if foundSelector is part of main page
+    let inDialog = false;
+    let elements = [];
+    elements[0] = document.querySelector(foundSelector);
+    for (let i = 0; i < elements.length; i++) {
+      let element = elements[i];
+      let parent = element.parentElement;
+      let parentName = parent.nodeName.toLowerCase();
+      if (parentName !== "body") {
+        elements.push(parent);
+        continue;
       }
-      // Exit early if click is in the dialog
-      if (inDialog) return;
+      if (
+        parentName === "body" &&
+        element.nodeName.toLowerCase() === "div" &&
+        element.id === "doc-detective"
+      ) {
+        inDialog = true;
+      }
+    }
+    // Exit early if click is in the dialog
+    if (inDialog) return;
+    if (mode === "search") {
       event.stopPropagation();
       event.preventDefault();
-      setSelector(foundSelector);
+    }
+    setSelector(foundSelector);
+
+    if (mode === "build") {
+      // Build event
+      const newEvent = {
+        type: event.type,
+        target: foundSelector,
+        x: event.x,
+        y: event.y,
+      };
+      // Add event to events
+      let newEvents = [...events];
+      newEvents.push(newEvent);
+      setEvents(newEvents);
     }
   };
 
@@ -306,9 +335,12 @@ function App() {
           </div>
         )}
         {mode === "build" && (
-          <Typography variant="h6" sx={{ marginTop: 2 }}>
-            Build: {output}
-          </Typography>
+          <div>
+            <Typography variant="h6" sx={{ marginTop: 2 }}>
+              Track interactions on the page to create tests.
+            </Typography>
+            {events && JSON.stringify(events)}
+          </div>
         )}
       </Box>
     </div>

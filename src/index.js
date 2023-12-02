@@ -9,20 +9,14 @@ browser.runtime.onMessage.addListener((message) => {
     case "togglePanel":
       togglePanel();
       break;
-    // case "getStorage":
-    //   getStorage();
-    //   break;
-    // case "setStorage":
-    //   setStorage(message.storage);
-    //   break;
     default:
       break;
   }
 });
 
 // Get current visible state from background service worker
-browser.runtime.sendMessage({ action: "getVisible" }).then((response) => {
-  if (response) togglePanel();
+browser.runtime.sendMessage({ action: "getState" }).then((response) => {
+  if (response.visible) togglePanel();
 });
 
 function togglePanel() {

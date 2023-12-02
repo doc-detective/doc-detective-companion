@@ -1,9 +1,11 @@
 var browser = require("webextension-polyfill");
 
-let events = []
-let visible = false
-
-console.log({events, visible});
+let state = {
+  visible: false,
+  mode: "search",
+  events: [],
+}
+console.log(state);
 
 // On extension install/update
 browser.runtime.onInstalled.addListener((details) => {
@@ -16,8 +18,8 @@ browser.runtime.onInstalled.addListener((details) => {
 // browser.browserAction.onClicked.addListener((tab) => insertDialog(tab));
 browser.browserAction.onClicked.addListener((tab) => {
   browser.tabs.sendMessage(tab.id, { action: "togglePanel" });
-  visible = !visible;
-
+  state.visible = !state.visible;
+  console.log(state);
 });
 
 // On message received
@@ -26,13 +28,13 @@ browser.runtime.onMessage.addListener(function (message) {
     case "openOptionsPage":
       openOptionsPage();
       break;
-    case "recordEvent":
-      events.push(message.event)
-      break;
-    case "getVisible":
-      return Promise.resolve(visible);
-    case "getEvents":
-      return Promise.resolve(events);
+    case "setState":
+      state = message.state;
+      console.log(state);
+      return Promise.resolve(state);
+    case "getState":
+      console.log(state);
+      return Promise.resolve(state);
     default:
       break;
   }
