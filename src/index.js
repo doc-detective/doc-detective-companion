@@ -20,6 +20,11 @@ browser.runtime.onMessage.addListener((message) => {
   }
 });
 
+// Get current visible state from background service worker
+browser.runtime.sendMessage({ action: "getVisible" }).then((response) => {
+  if (response) togglePanel();
+});
+
 function togglePanel() {
   const id = "doc-detective";
   const width = 350;
