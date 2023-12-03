@@ -4,6 +4,7 @@ let state = {
   visible: false,
   mode: "search",
   events: [],
+  active: true,
 }
 console.log(state);
 

@@ -7,6 +7,8 @@ import {
   Typography,
   Box,
   IconButton,
+  ToggleButtonGroup,
+  ToggleButton,
 } from "@mui/material";
 import { finder } from "@medv/finder";
 import SearchIcon from "@mui/icons-material/Search";
@@ -123,7 +125,7 @@ function splitAndTrim(string) {
 
 function App() {
   const [mode, setMode] = useState("search");
-  const [output, setOutput] = useState("");
+  const [active, setActive] = useState(true);
   const [storage, setStorage] = useState(null);
   const [selector, setSelector] = useState("");
   const [events, setEvents] = useState([]);
@@ -141,16 +143,17 @@ function App() {
       if (response) {
         setEvents(response.events);
         setMode(response.mode);
+        setActive(response.active);
       }
     });
   }, []);
 
   // Update state in background service worker
   useEffect(() => {
-    const state = { mode, events, visible: true };
+    const state = { mode, events, active, visible: true };
     // console.log(state);
     browser.runtime.sendMessage({ action: "setState", state });
-  }, [events, mode]);
+  }, [events, mode, active]);
 
   // Debug
   // useEffect(() => {
@@ -160,7 +163,12 @@ function App() {
   const handleModeChange = (event, newMode) => {
     if (newMode !== null) {
       setMode(newMode);
-      setOutput(newMode === "search" ? "CSS Selector" : "Array");
+    }
+  };
+
+  const handleActiveChange = (event, newActive) => {
+    if (newActive !== null) {
+      setActive(newActive);
     }
   };
 
@@ -175,7 +183,7 @@ function App() {
   };
 
   const processEvent = (event) => {
-    console.log(event)
+    console.log(event);
     const panel = document.getElementById("doc-detective");
     let options = {
       root: document.body,
@@ -318,6 +326,29 @@ function App() {
             label="Build"
           />
         </Tabs>
+
+        <ToggleButtonGroup
+          style={{ display: "flex", justifyContent: "center" }}
+          value={active}
+          exclusive
+          onChange={handleActiveChange}
+          aria-label="active"
+        >
+          <ToggleButton
+            sx={{ flexGrow: 1, maxWidth: "50%" }}
+            value={true}
+            aria-label="left aligned"
+          >
+            On
+          </ToggleButton>
+          <ToggleButton
+            sx={{ flexGrow: 1, maxWidth: "50%" }}
+            value={false}
+            aria-label="centered"
+          >
+            Off
+          </ToggleButton>
+        </ToggleButtonGroup>
 
         {mode === "search" && (
           <div>
