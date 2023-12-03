@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { finder } from "@medv/finder";
 import SearchIcon from "@mui/icons-material/Search";
-// import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 import HandymanIcon from "@mui/icons-material/Handyman";
@@ -125,10 +125,29 @@ function splitAndTrim(string) {
 
 function App() {
   const [mode, setMode] = useState("search");
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
   const [storage, setStorage] = useState(null);
   const [selector, setSelector] = useState("");
   const [events, setEvents] = useState([]);
+
+  const listenerEvents = [{ type: "click" }, { type: "keypress" }];
+
+  // Add/remove event listeners
+  useEffect(() => {
+    const cleanup = () => {
+      listenerEvents.forEach((event) => {
+        document.removeEventListener(event.type, processEvent);
+      });
+    };
+
+    if (active) {
+      listenerEvents.forEach((event) => {
+        document.addEventListener(event.type, processEvent);
+      });
+    }
+
+    return cleanup;
+  }, [mode, active, events]);
 
   // Run once on load
   useEffect(() => {
@@ -146,6 +165,11 @@ function App() {
         setActive(response.active);
       }
     });
+    return () => {
+      listenerEvents.forEach((event) => {
+        document.removeEventListener(event.type, processEvent);
+      });
+    };
   }, []);
 
   // Update state in background service worker
@@ -163,12 +187,6 @@ function App() {
   const handleModeChange = (event, newMode) => {
     if (newMode !== null) {
       setMode(newMode);
-    }
-  };
-
-  const handleActiveChange = (event, newActive) => {
-    if (newActive !== null) {
-      setActive(newActive);
     }
   };
 
@@ -255,9 +273,10 @@ function App() {
       event.stopPropagation();
       event.preventDefault();
     }
-    setSelector(foundSelector);
-
-    if (mode === "build") {
+    console.log({ mode });
+    if (mode === "search" && event.type === "click") {
+      setSelector(foundSelector);
+    } else if (mode === "build") {
       // Build event
       const newEvent = {
         type: event.type,
@@ -272,21 +291,28 @@ function App() {
     }
   };
 
-  document.addEventListener("click", processEvent);
-
   return (
     <div style={resetStyles}>
       <Box>
         <AppBar position="static">
-          <Toolbar variant="dense">
-            <Typography variant="h6" style={{ flexGrow: 1 }}>
+          <Toolbar variant="dense" sx={{ display: "flex" }}>
+            <Typography variant="h6" sx={{ flexGrow: 1 }}>
               Doc Detective
             </Typography>
             <IconButton
-              color="inherit"
+              {...(active ? { color: "inherit" } : { color: "error" })}
+              aria-label="activate"
+              edge="end"
+              onClick={() => setActive(!active)}
               style={{ margin: "auto" }}
+            >
+              <PowerSettingsNewIcon />
+            </IconButton>
+            <IconButton
+              color="inherit"
               edge="end"
               aria-label="settings"
+              style={{ margin: "auto" }}
               onClick={() => {
                 browser.runtime.sendMessage({
                   action: "openOptionsPage",
@@ -326,29 +352,6 @@ function App() {
             label="Build"
           />
         </Tabs>
-
-        <ToggleButtonGroup
-          style={{ display: "flex", justifyContent: "center" }}
-          value={active}
-          exclusive
-          onChange={handleActiveChange}
-          aria-label="active"
-        >
-          <ToggleButton
-            sx={{ flexGrow: 1, maxWidth: "50%" }}
-            value={true}
-            aria-label="left aligned"
-          >
-            On
-          </ToggleButton>
-          <ToggleButton
-            sx={{ flexGrow: 1, maxWidth: "50%" }}
-            value={false}
-            aria-label="centered"
-          >
-            Off
-          </ToggleButton>
-        </ToggleButtonGroup>
 
         {mode === "search" && (
           <div>
