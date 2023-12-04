@@ -201,7 +201,7 @@ function App() {
   };
 
   const processEvent = (event) => {
-    console.log(event);
+  //  console.log(event);
     const panel = document.getElementById("doc-detective");
     let options = {
       root: document.body,
@@ -246,15 +246,23 @@ function App() {
       threshold: 1000,
       maxNumberOfTries: 10_000,
     };
-    const foundSelector = finder(event.target, options);
+    let foundSelector;
+    try {
+      foundSelector = event.target ? finder(event.target, options) : "body";
+    } catch {
+      foundSelector = "body";
+    }
     // Loop to identify if foundSelector is part of main page
     let inDialog = false;
     let elements = [];
     elements[0] = document.querySelector(foundSelector);
+  //  console.log(elements);
     for (let i = 0; i < elements.length; i++) {
       let element = elements[i];
+      let elementName = element?.nodeName.toLowerCase();
+      if (elementName === "body" || elementName === "html") continue;
       let parent = element.parentElement;
-      let parentName = parent.nodeName.toLowerCase();
+      let parentName = parent?.nodeName.toLowerCase();
       if (parentName !== "body") {
         elements.push(parent);
         continue;
@@ -269,21 +277,24 @@ function App() {
     }
     // Exit early if click is in the dialog
     if (inDialog) return;
-    if (mode === "search") {
+    if (mode === "search" && event.type === "click") {
       event.stopPropagation();
       event.preventDefault();
-    }
-    console.log({ mode });
-    if (mode === "search" && event.type === "click") {
       setSelector(foundSelector);
     } else if (mode === "build") {
       // Build event
       const newEvent = {
         type: event.type,
         target: foundSelector,
-        x: event.x,
-        y: event.y,
       };
+      if (event.type === "click") {
+        newEvent.x = event.x;
+        newEvent.y = event.y;
+      } else if (event.type === "keypress") {
+        newEvent.key = event.key;
+        newEvent.charCode = event.charCode;
+        newEvent.keyCode = event.keyCode;
+      }
       // Add event to events
       let newEvents = [...events];
       newEvents.push(newEvent);
@@ -373,7 +384,14 @@ function App() {
             <Typography variant="h6" sx={{ marginTop: 2 }}>
               Track interactions on the page to create tests.
             </Typography>
-            {events && JSON.stringify(events)}
+            <Block
+              object={events}
+              options={{
+                wrapLines: true,
+                language: "json",
+                showLineNumbers: false,
+              }}
+            />
           </div>
         )}
       </Box>
