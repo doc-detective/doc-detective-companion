@@ -26,10 +26,10 @@ const Block = ({ object, options }) => {
     switch (multiline) {
       case "oneObjectPerLine":
         text = JSON.stringify(object, null, 2)
-          .replace(/",\n/g, '", ')
-          .replace(/{\n/g, "{ ")
-          .replace(/\n\s*}/g, " }")
-          .replace(/ +/g, " ");
+          .replace(/,\s+"/g, ', "')
+          .replace("}, {", "},\n{")
+          .replace(/{\n\s+/g, "{ ")
+          .replace(/\n\s+}/g, " }")
         break;
       case true:
         text = JSON.stringify(object, null, 2);
