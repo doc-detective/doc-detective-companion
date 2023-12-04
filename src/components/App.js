@@ -7,8 +7,7 @@ import {
   Typography,
   Box,
   IconButton,
-  ToggleButtonGroup,
-  ToggleButton,
+  Button,
 } from "@mui/material";
 import { finder } from "@medv/finder";
 import SearchIcon from "@mui/icons-material/Search";
@@ -16,6 +15,7 @@ import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 import HandymanIcon from "@mui/icons-material/Handyman";
+import ClearIcon from "@mui/icons-material/Clear";
 import Block from "./Block.js";
 
 const resetStyles = {
@@ -382,9 +382,19 @@ function App() {
         )}
         {mode === "build" && (
           <div>
-            <Typography sx={{ marginTop: 2 }}>
+            <Typography sx={{ marginTop: 2, flexGrow: 1 }}>
               Track interactions to create tests.
             </Typography>
+            <Box sx={{ display: "flex" }}>
+              <div style={{ flexGrow: 1 }}></div>
+              <Button
+                variant="outlined"
+                onClick={() => setEvents([])}
+                endIcon={<ClearIcon />}
+              >
+                Clear
+              </Button>
+            </Box>
             <Block
               object={events}
               options={{
