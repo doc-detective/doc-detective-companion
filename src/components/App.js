@@ -201,7 +201,7 @@ function App() {
   };
 
   const processEvent = (event) => {
-  //  console.log(event);
+    //  console.log(event);
     const panel = document.getElementById("doc-detective");
     let options = {
       root: document.body,
@@ -256,7 +256,7 @@ function App() {
     let inDialog = false;
     let elements = [];
     elements[0] = document.querySelector(foundSelector);
-  //  console.log(elements);
+    //  console.log(elements);
     for (let i = 0; i < elements.length; i++) {
       let element = elements[i];
       let elementName = element?.nodeName.toLowerCase();
@@ -285,12 +285,13 @@ function App() {
       // Build event
       const newEvent = {
         type: event.type,
-        target: foundSelector,
       };
       if (event.type === "click") {
+        newEvent.target = foundSelector;
         newEvent.x = event.x;
         newEvent.y = event.y;
       } else if (event.type === "keypress") {
+        if (foundSelector !== "body") newEvent.target = foundSelector;
         newEvent.key = event.key;
         newEvent.charCode = event.charCode;
         newEvent.keyCode = event.keyCode;
@@ -367,7 +368,7 @@ function App() {
         {mode === "search" && (
           <div>
             <Typography sx={{ marginTop: 2 }}>
-              Find the shortest CSS selector for elements you click on.
+              Find the shortest CSS selector for an element.
             </Typography>
             <Block
               object={selector}
@@ -381,8 +382,8 @@ function App() {
         )}
         {mode === "build" && (
           <div>
-            <Typography variant="h6" sx={{ marginTop: 2 }}>
-              Track interactions on the page to create tests.
+            <Typography sx={{ marginTop: 2 }}>
+              Track interactions to create tests.
             </Typography>
             <Block
               object={events}
@@ -390,6 +391,7 @@ function App() {
                 wrapLines: true,
                 language: "json",
                 showLineNumbers: false,
+                multiline: "oneObjectPerLine",
               }}
             />
           </div>
