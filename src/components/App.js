@@ -8,6 +8,8 @@ import {
   Box,
   IconButton,
   Button,
+  ToggleButtonGroup,
+  ToggleButton,
 } from "@mui/material";
 import { finder } from "@medv/finder";
 import SearchIcon from "@mui/icons-material/Search";
@@ -129,8 +131,13 @@ function App() {
   const [storage, setStorage] = useState(null);
   const [selector, setSelector] = useState("");
   const [events, setEvents] = useState([]);
+  const [buildMode, setBuildMode] = useState("events");
+  const [test, setTest] = useState({});
 
-  const listenerEvents = [{ type: "click" }, { type: "keypress" }];
+  const listenerEvents = [
+    { type: "click" },
+    { type: "keypress" },
+  ];
 
   // Add/remove event listeners
   useEffect(() => {
@@ -150,7 +157,7 @@ function App() {
   }, [mode, active, events]);
 
   // Run once on load
-  useEffect(() => {
+  useEffect(async () => {
     // Load storage
     const fetchData = async () => {
       const result = await loadStorage();
@@ -158,11 +165,12 @@ function App() {
     };
     fetchData();
     // Get initial state
-    browser.runtime.sendMessage({ action: "getState" }).then((response) => {
+    await browser.runtime.sendMessage({ action: "getState" }).then((response) => {
       if (response) {
         setEvents(response.events);
         setMode(response.mode);
         setActive(response.active);
+        setBuildMode(response.buildMode);
       }
     });
     return () => {
@@ -174,10 +182,53 @@ function App() {
 
   // Update state in background service worker
   useEffect(() => {
-    const state = { mode, events, active, visible: true };
+    const state = { mode, events, active, buildMode, visible: true };
     // console.log(state);
     browser.runtime.sendMessage({ action: "setState", state });
-  }, [events, mode, active]);
+  }, [events, mode, active, buildMode]);
+
+  // Update test
+  useEffect(() => {
+    if (buildMode === "test") {
+      let newTest = {
+        tests: [
+          {
+            steps: [],
+          },
+        ],
+        // Minimal DD test format
+      };
+      events.forEach((event, index) => {
+        let step = {};
+        if (event.type === "click") {
+          // Find action with click = true
+          step.action = "find";
+          step.selector = event.target;
+          step.click = true;
+        } else if (event.type === "keypress") {
+          if (index >= 1 && event.target === events[index - 1].target) {
+            // If target matches previous target, add keypress to existing action
+            const previousKeys =
+              newTest.tests[0].steps[newTest.tests[0].steps.length - 1].keys;
+            newTest.tests[0].steps[newTest.tests[0].steps.length - 1].keys =
+              previousKeys ? previousKeys + event.key : event.key;
+          } else {
+            // If target does not match previous target
+            // If target exists, find action. If not, typeKeys action.
+            step.action = event.target ? "find" : "typeKeys";
+            if (event.target) step.selector = event.target;
+            step.keys = event.key;
+          }
+        } else if (event.type === "DOMContentLoaded") {
+          // Add url to test
+          step.action = "goTo";
+          step.url = event.url;
+        }
+        newTest.tests[0].steps.push(step);
+      });
+      setTest(newTest);
+    }
+  }, [events, buildMode]);
 
   // Debug
   // useEffect(() => {
@@ -385,6 +436,37 @@ function App() {
             <Typography sx={{ marginTop: 2, flexGrow: 1 }}>
               Track interactions to create tests.
             </Typography>
+            <ToggleButtonGroup
+              value={buildMode}
+              exclusive
+              onChange={(event, newMode) => {
+                if (newMode !== null) {
+                  setBuildMode(newMode);
+                }
+              }}
+              aria-label="Build mode"
+              sx={{
+                display: "flex",
+                width: "100%",
+                marginTop: 2,
+                marginBottom: 2,
+              }}
+            >
+              <ToggleButton
+                value="events"
+                aria-label="Events"
+                sx={{ flexGrow: 1, maxWidth: "50%" }}
+              >
+                Events
+              </ToggleButton>
+              <ToggleButton
+                value="test"
+                aria-label="Test"
+                sx={{ flexGrow: 1, maxWidth: "50%" }}
+              >
+                Test
+              </ToggleButton>
+            </ToggleButtonGroup>
             <Box sx={{ display: "flex" }}>
               <div style={{ flexGrow: 1 }}></div>
               <Button
@@ -396,7 +478,7 @@ function App() {
               </Button>
             </Box>
             <Block
-              object={events}
+              object={buildMode === "events" ? events : test}
               options={{
                 wrapLines: true,
                 language: "json",

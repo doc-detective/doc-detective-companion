@@ -5,6 +5,7 @@ let state = {
   mode: "search",
   events: [],
   active: true,
+  buildMode: "events",
 }
 console.log(state);
 
