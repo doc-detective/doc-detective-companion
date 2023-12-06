@@ -21,6 +21,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Block from "./Block.js";
 
 const resetStyles = {
+  revert: "all",
   all: "initial",
   fontFamily: "inherit",
   fontSize: "100%",
@@ -354,6 +355,13 @@ function App() {
       setEvents(newEvents);
     }
   };
+
+  // Get height of header element, if present
+  // TODO: Figure out why some headers overlap and some don't
+  // TODO: Overlap example: https://mui.com/material-ui/react-button/#basic-button
+  // TODO: No overlap example: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/StorageArea/get
+  // const header = document.querySelector("header");
+  // const headerHeight = header ? header.offsetHeight : 0;
 
   return (
     <div style={resetStyles}>
