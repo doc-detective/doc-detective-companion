@@ -212,6 +212,7 @@ function App() {
               newTest.tests[0].steps[newTest.tests[0].steps.length - 1].keys;
             newTest.tests[0].steps[newTest.tests[0].steps.length - 1].keys =
               previousKeys ? previousKeys + event.key : event.key;
+            return
           } else {
             // If target does not match previous target
             // If target exists, find action. If not, typeKeys action.
