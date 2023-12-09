@@ -29,6 +29,8 @@ const resetStyles = {
   boxSizing: "border-box",
 };
 
+import "./App.css";
+
 // TODO: Rebuild options page in React
 // TODO: Get "Search" working
 // TODO: Get "Build" working`
@@ -369,7 +371,7 @@ function App() {
 
   // Get height of header element, if present
   const header = document.querySelector("header")
-  const headerPosition= window.getComputedStyle(header).position 
+  const headerPosition = header ? window.getComputedStyle(header).position : "none";
   const headerHeight = headerPosition === "fixed" ? header.offsetHeight : 0;
 
   return (
