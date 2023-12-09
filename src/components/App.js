@@ -368,16 +368,14 @@ function App() {
   };
 
   // Get height of header element, if present
-  // TODO: Figure out why some headers overlap and some don't
-  // TODO: Overlap example: https://mui.com/material-ui/react-button/#basic-button
-  // TODO: No overlap example: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/StorageArea/get
-  // const header = document.querySelector("header");
-  // const headerHeight = header ? header.offsetHeight : 0;
+  const header = document.querySelector("header")
+  const headerPosition= window.getComputedStyle(header).position 
+  const headerHeight = headerPosition === "fixed" ? header.offsetHeight : 0;
 
   return (
     <div style={resetStyles}>
       <Box>
-        <AppBar position="static">
+        <AppBar sx={{ paddingTop: `${headerHeight}px`, position: "static"}}>
           <Toolbar variant="dense" sx={{ display: "flex" }}>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
               Doc Detective
