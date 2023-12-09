@@ -56,10 +56,6 @@
     "scss": "./src/**/*.css",
     "scss_bundles": [
       {
-        "name": "dialog",
-        "src": "./src/dialog.css"
-      },
-      {
         "name": "options",
         "src": "./src/options.css"
       }
@@ -72,10 +68,6 @@
       {
         "name": "options",
         "src": "./src/options.js"
-      },
-      {
-        "name": "dialog",
-        "src": "./src/dialog.js"
       },
       {
         "name": "bundle",
