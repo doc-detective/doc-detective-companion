@@ -189,6 +189,10 @@ function App() {
     browser.runtime.sendMessage({ action: "setState", state });
   }, [events, mode, active, buildMode]);
 
+  const specialKeyMap = {
+    "Enter": "$ENTER$"
+  }
+
   // Update test
   useEffect(() => {
     if (buildMode === "test") {
@@ -208,7 +212,11 @@ function App() {
           step.selector = event.target;
           step.click = true;
         } else if (event.type === "keypress") {
-          if (index >= 1 && event.target === events[index - 1].target) {
+          // If event.key present in specialKeyMap, replace with corresponding value
+          if (specialKeyMap[event.key]) {
+            step.action = "typeKeys";
+            step.keys = [specialKeyMap[event.key]];
+          }  else if (index >= 1 && event.target === events[index - 1].target) {
             // If target matches previous target, add keypress to existing action
             const previousKeys =
               newTest.tests[0].steps[newTest.tests[0].steps.length - 1].keys;
