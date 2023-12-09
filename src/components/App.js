@@ -190,7 +190,7 @@ function App() {
   }, [events, mode, active, buildMode]);
 
   const specialKeyMap = {
-    "Enter": "$ENTER$"
+    Enter: "$ENTER$",
   }
 
   // Update test
