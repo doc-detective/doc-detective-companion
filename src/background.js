@@ -43,7 +43,7 @@ browser.runtime.onMessage.addListener(function (message) {
       openOptionsPage();
       break;
     case "setState":
-      state = message.state;
+      state = { ...state, ...message.state };
       console.log(state);
       return Promise.resolve(state);
     case "getState":

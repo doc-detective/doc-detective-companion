@@ -251,6 +251,8 @@ function App() {
     const margin = document.body.style.marginRight.replace("px", "");
     document.body.style.marginRight = margin ? `${margin - width}px` : "0px";
     document.removeEventListener("click", processEvent);
+    const state = { visible: false }
+    browser.runtime.sendMessage({ action: "setState", state });
     panel.remove();
   };
 
