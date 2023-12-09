@@ -1,3 +1,4 @@
+var browser = require("webextension-polyfill");
 import React, { useState, useEffect } from "react";
 import {
   AppBar,

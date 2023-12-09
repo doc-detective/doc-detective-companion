@@ -16,6 +16,7 @@ browser.runtime.onMessage.addListener((message) => {
 
 // Get current visible state from background service worker
 browser.runtime.sendMessage({ action: "getState" }).then((response) => {
+  console.log({background_response: response })
   if (response.visible) togglePanel();
 });
 

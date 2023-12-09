@@ -1,21 +1,54 @@
 var browser = require("webextension-polyfill");
 
+let state = {
+  visible: false,
+  mode: "search",
+  events: [],
+  active: true,
+  buildMode: "events",
+};
+console.log(state);
+
 // On extension install/update
 browser.runtime.onInstalled.addListener((details) => {
   if (details.reason == "install" || details.reason == "update") {
+    console.log("Set default options.")
     setDefaultOptions();
   }
 });
 
-// On extension button click (Chrome - Manifest v3)
-browser.action.onClicked.addListener((tab) => insertDialog(tab));
+// On extension button click (Firefox - Manifest v2)
+// browser.browserAction.onClicked.addListener((tab) => insertDialog(tab));
+try {
+  browser.browserAction.onClicked.addListener((tab) => {
+    console.log("Toggle panel.")
+    browser.tabs.sendMessage(tab.id, { action: "togglePanel" });
+    state.visible = !state.visible;
+    console.log(state);
+  });
+} catch {
+  browser.action.onClicked.addListener((tab) => {
+    console.log("Toggle panel.")
+    browser.tabs.sendMessage(tab.id, { action: "togglePanel" });
+    state.visible = !state.visible;
+    console.log(state);
+  });
+}
 
 // On message received
 browser.runtime.onMessage.addListener(function (message) {
+  console.log({message})
   switch (message.action) {
     case "openOptionsPage":
       openOptionsPage();
       break;
+    case "setState":
+      state = message.state;
+      console.log(state);
+      return Promise.resolve(state);
+    case "getState":
+      console.log(state);
+      return Promise.resolve(state);
     default:
       break;
   }
@@ -23,6 +56,7 @@ browser.runtime.onMessage.addListener(function (message) {
 
 // Open options page
 function openOptionsPage() {
+  console.log("Open options page.")
   browser.runtime.openOptionsPage();
 }
 
@@ -53,17 +87,4 @@ async function setDefaultOptions() {
       modeDisallowedAttributes: "exact",
     });
   }
-}
-
-function insertDialog(tab) {
-  // Inject dialog CSS
-  browser.scripting.insertCSS({
-    target: { tabId: tab.id },
-    files: ["dialog.css"],
-  });
-  // Create or remove dialog
-  browser.scripting.executeScript({
-    target: { tabId: tab.id },
-    files: ["dialog.js"],
-  });
 }
