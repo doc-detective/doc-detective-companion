@@ -16,3 +16,6 @@
 *.env
 
 npm-debug.log*
+
+src/index.html
+*.bundle.js
