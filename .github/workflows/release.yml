@@ -2,8 +2,9 @@ name: Publish to extension stores
 on:
   release:
     types: [created]
+  workflow_dispatch:
 jobs:
-  publish:
+  publish-firefox:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -15,14 +16,29 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: npm ci || npm install
-      - name: Build and publish extensions
-        run: npm run publish
+      - name: Build and publish Firefox extension
+        run: npm run publish:firefox
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
+          WEB_EXT_SOURCE_DIR: ${{ secrets.WEB_EXT_SOURCE_DIR }}
+          
+  publish-chrome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: npm ci || npm install
+      - name: Build and publish Chrome extension
+        run: npm run publish:chrome
         env:
           EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
           CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
-          WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
-          WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
-          WEB_EXT_SOURCE_DIR: ${{ secrets.WEB_EXT_SOURCE_DIR }}
-          
